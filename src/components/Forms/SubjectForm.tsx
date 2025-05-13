@@ -36,7 +36,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
   const { data: groups, isLoading: isGroupLoading } = useGetGroupsInMyFacultyQuery();
   const { data: faculties } = useGetFacultiesInMyUniversityQuery();
   const [selectedFaculty, setSelectedFaculty] = useState<string | null>(null);
-  const { data: teachers, isLoading: isTeachersLoading } = useGetTeachersByFacultyIdQuery(selectedFaculty!, {
+  const { data: teachers } = useGetTeachersByFacultyIdQuery(selectedFaculty!, {
     skip: !selectedFaculty,
   });
 

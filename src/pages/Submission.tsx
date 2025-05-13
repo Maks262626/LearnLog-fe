@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { StudentSubmissionStatus } from '@/models/StudentSubmission';
 import { UserRoleName } from '@/models/User';
+import { Color } from '@/types/Color';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Button, Chip, Divider, IconButton, Tooltip, Typography } from '@mui/material';
 
@@ -18,7 +19,6 @@ import {
   useGetStudentSubmissionByIdQuery,
   useUpdateStudentSubmissionMutation,
 } from '@/redux/studentSubmissionApiSlice';
-import { Color } from '@/redux/types/Color';
 
 const getStatusColor = (status: StudentSubmissionStatus): Color => {
   const map: Record<StudentSubmissionStatus, Color> = {

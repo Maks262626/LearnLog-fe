@@ -112,7 +112,7 @@ const JournalView = ({ subjectInstances, users }: IJournalView) => {
                   cursor: 'pointer',
                   transition: 'background 0.2s ease',
                   '&:hover': {
-                    backgroundColor: '#eae712', 
+                    backgroundColor: '#eae712',
                   },
                 }}
               >
@@ -129,4 +129,4 @@ const JournalView = ({ subjectInstances, users }: IJournalView) => {
 };
 
 export default JournalView;
-``
+``;

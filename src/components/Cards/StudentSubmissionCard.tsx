@@ -2,10 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { StudentSubmission, StudentSubmissionStatus } from '@/models/StudentSubmission';
 import { routes } from '@/routes';
+import { Color } from '@/types/Color';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Card, CardContent, Chip, IconButton, Tooltip, Typography } from '@mui/material';
-
-import { Color } from '@/redux/types/Color';
 
 interface IStudentSubmissionCard {
   submission: StudentSubmission;

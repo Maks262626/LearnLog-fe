@@ -1,5 +1,4 @@
 import { Day, SubjectInstance, SubjectInstanceStatus, daysOfWeek } from '@/models/SubjectInstance';
-import { Color } from '@/types/Color';
 import { Box, Grid, Paper, Typography } from '@mui/material';
 
 interface IWeekView {

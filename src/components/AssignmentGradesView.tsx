@@ -47,7 +47,7 @@ const AssignmentGradesView = ({ users, assignments }: IAssignmentGradesView) => 
   };
 
   return (
-    <Box sx={{ overflowX: 'auto',p:2 }}>
+    <Box sx={{ overflowX: 'auto', p: 2 }}>
       <Box
         sx={{
           display: 'grid',
@@ -56,7 +56,7 @@ const AssignmentGradesView = ({ users, assignments }: IAssignmentGradesView) => 
           mb: 1,
           backgroundColor: '#282828',
           borderBottom: '2px solid #e2e8f0',
-          py:1
+          py: 1,
         }}
       >
         <Typography sx={{ fontWeight: 600, px: 1 }}></Typography>
