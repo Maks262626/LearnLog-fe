@@ -6,7 +6,11 @@ const Profile = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    logout();
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin,
+      },
+    });
   };
 
   return (

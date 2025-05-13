@@ -15,7 +15,11 @@ const Auth = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    logout();
+    logout({
+      logoutParams: {
+        returnTo: window.location.origin,
+      },
+    });
   };
 
   if (isLoading || !isAuthenticated) {
