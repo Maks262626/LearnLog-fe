@@ -30,20 +30,19 @@ import { useDeleteUserMutation, useGetUserByIdQuery, useUpdateUserRoleMutation }
 
 const UserManage = () => {
   const { id } = useParams();
-  if (!id) return <Typography>No user ID provided.</Typography>;
+  const navigate = useNavigate();
 
-  const { data: user, isLoading, error, refetch } = useGetUserByIdQuery(id);
-  if (!user?.data) return <Typography>User Not Found</Typography>;
-
+  const { data: user, isLoading, error, refetch } = useGetUserByIdQuery(id!, { skip: !id });
   const { data: university } = useGetUniversityByIdQuery(user?.data.university_id!, { skip: !user });
   const { data: faculty } = useGetFacultyByIdQuery(user?.data.faculty_id!, { skip: !user });
   const { data: group } = useGetGroupByIdQuery(user?.data.group_id!, { skip: !user });
 
   const [updateUserRole, { isLoading: isUpdating }] = useUpdateUserRoleMutation();
   const [deleteUser] = useDeleteUserMutation();
-  const [selectedRole, setSelectedRole] = useState<UserRoleName>(user?.data.role || UserRoleName.STUDENT);
+
+  const [selectedRole, setSelectedRole] = useState<UserRoleName>(UserRoleName.STUDENT);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
-  const navigate = useNavigate();
+
   useEffect(() => {
     if (user?.data?.role) {
       setSelectedRole(user.data.role);
@@ -51,13 +50,10 @@ const UserManage = () => {
     }
   }, [user]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
 
-  if (error || !user) {
-    return <Typography>Error fetching user data.</Typography>;
-  }
+  if (!id) return <Typography>No user ID provided.</Typography>;
+  if (isLoading) return <Loader />;
+  if (error || !user?.data) return <Typography>Error fetching user data.</Typography>;
 
   const handleRoleChange = (event: SelectChangeEvent<UserRoleName>) => {
     setSelectedRole(event.target.value as UserRoleName);
