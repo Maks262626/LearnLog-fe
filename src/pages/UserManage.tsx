@@ -50,7 +50,6 @@ const UserManage = () => {
     }
   }, [user]);
 
-
   if (!id) return <Typography>No user ID provided.</Typography>;
   if (isLoading) return <Loader />;
   if (error || !user?.data) return <Typography>Error fetching user data.</Typography>;

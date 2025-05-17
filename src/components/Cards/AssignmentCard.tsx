@@ -10,10 +10,6 @@ interface IAssignmentCard {
 }
 
 const AssignmentCard = ({ assignment, handleClick, onEdit, onDelete }: IAssignmentCard) => {
-  const truncateDescription = (desc: string) => {
-    return desc.length > 50 ? desc.slice(0, 50) + '...' : desc;
-  };
-
   return (
     <Card
       sx={{
@@ -64,9 +60,6 @@ const AssignmentCard = ({ assignment, handleClick, onEdit, onDelete }: IAssignme
       <CardContent>
         <Typography variant="h6" gutterBottom>
           {assignment.name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary" gutterBottom>
-          {truncateDescription(assignment.description)}
         </Typography>
         <Typography variant="caption" color="text.secondary">
           Due: {new Date(assignment.due_date).toLocaleDateString()}

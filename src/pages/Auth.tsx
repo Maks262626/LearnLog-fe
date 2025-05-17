@@ -23,8 +23,6 @@ const Auth = () => {
   };
 
   if (isLoading || !isAuthenticated) {
-    console.log('AUTH LOADER');
-
     return <Loader />;
   }
 

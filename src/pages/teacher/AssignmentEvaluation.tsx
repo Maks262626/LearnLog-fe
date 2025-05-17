@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Grade } from '@/models/Grade';
 import { Box, Typography } from '@mui/material';
+import MarkdownPreview from '@uiw/react-markdown-preview';
 
 import GradeModal from '@/components/Modals/GradeModal';
 
@@ -111,6 +112,10 @@ const AssignmentEvaluation = () => {
           </Box>
         </Box>
       ))}
+
+      <Box sx={{ py: 5 }}>
+        <MarkdownPreview source={assignment.data.description} style={{ padding: '24px' }} />
+      </Box>
 
       <GradeModal open={open} onClose={() => setOpen(false)} onSubmit={onSubmit} grade={grade} />
     </Box>

@@ -4,7 +4,9 @@ import { Assignment } from '@/models/Assignment';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
+import MDEditor from '@uiw/react-md-editor';
 import dayjs, { Dayjs } from 'dayjs';
+import rehypeSanitize from 'rehype-sanitize';
 
 import { AssigmentValidationType, assigmentValidation } from '@/utils/zod-validation';
 
@@ -43,6 +45,7 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
           display: 'flex',
           flexDirection: 'column',
           gap: 3,
+          width: '100%',
         }}
       >
         <Controller
@@ -59,7 +62,7 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
             />
           )}
         />
-        <Controller
+        {/* <Controller
           name="description"
           control={control}
           render={({ field }) => (
@@ -70,6 +73,20 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
               helperText={errors.description?.message}
               variant="outlined"
               fullWidth
+            />
+          )}
+        /> */}
+        <Controller
+          name="description"
+          control={control}
+          render={({ field }) => (
+            <MDEditor
+              value={field.value}
+              onChange={field.onChange}
+              height={500}
+              previewOptions={{
+                rehypePlugins: [[rehypeSanitize]],
+              }}
             />
           )}
         />
