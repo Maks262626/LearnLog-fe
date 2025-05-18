@@ -85,6 +85,6 @@ export const downloadGroupAttendanceIndividualPdf = async (groupId: string) => {
 export const downloadGroupGradeSummaryXlsx = async (groupId: string) => {
   const res = await fetchGroupGradeSummaryXlsx(groupId);
   if (!res) return;
-  const link = 'ahahahapdf';
+  const link = 'group-report.xlsx';
   await downloadResponceAsFile(res, link);
 };

@@ -24,6 +24,7 @@ import Schedules from './pages/manager/Schedules';
 import CreateSubject from './pages/manager/Subject/CreateSubject';
 import Subjects from './pages/manager/Subject/Subjects';
 import UpdateSubject from './pages/manager/Subject/UpdateSubject';
+import AssignmentView from './pages/student/AssignmentView';
 import StudentAssignments from './pages/student/StudentAssignments';
 import StudentAttendances from './pages/student/StudentAttendances';
 import StudentGrades from './pages/student/StudentGrades';
@@ -150,6 +151,7 @@ function App() {
           <Route path={routes.PUBLIC.STUDENT_GRADES} element={<StudentGrades />} />
           <Route path={routes.PUBLIC.STUDENT_ASSIGNMENTS} element={<StudentAssignments />} />
           <Route path={routes.PUBLIC.STUDENT_ATTENDANCES} element={<StudentAttendances />} />
+          <Route path={`${routes.PUBLIC.STUDENT_ASSIGNMENTS}/:id`} element={<AssignmentView />} />
         </Route>
 
         <Route element={<AuthLayout />}>
