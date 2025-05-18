@@ -31,21 +31,8 @@ export const routes = {
     TEACHER_FINAL_GRADES: '/teacher_final_grades',
     REPORTS: '/reports',
   },
-  PRIVATE: {},
   API: {
     BASE: import.meta.env.VITE_API_BASE,
-    UNIVERSITY: '/university',
-    FACULTY: '/faculty',
-    USER: '/user',
-    GROUP: '/group',
-    SUBJECT: '/subject',
-    SUBJECT_INSTANCE: '/subject-instance',
-    ATTENDANCE: '/attendance',
-    ASSIGNMENTS: '/assignment',
-    GRADE: '/grade',
-    FINAL_GRADE: '/final-grade',
-    REPORTS: '/reports',
-    STUDENT_SUBMISSION: '/student-submission',
   },
 };
 

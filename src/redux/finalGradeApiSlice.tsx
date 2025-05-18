@@ -1,5 +1,6 @@
 import { FinalGrade } from '@/models/FinalGrade';
-import { routes } from '@/routes';
+
+import { FINAL_GRADE_CONTROLLER, FINAL_GRADE_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -7,7 +8,7 @@ export const finalGradeApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     createFinalGrade: build.mutation<{ data: FinalGrade }, Partial<FinalGrade>>({
       query: (body) => ({
-        url: routes.API.FINAL_GRADE,
+        url: buildRoute(FINAL_GRADE_CONTROLLER, FINAL_GRADE_ROUTES.CREATE),
         method: 'POST',
         body,
       }),
@@ -15,7 +16,7 @@ export const finalGradeApiSlice = apiSlice.injectEndpoints({
     }),
     updateFinalGrade: build.mutation<{ data: FinalGrade }, { id: string; body: Partial<FinalGrade> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.FINAL_GRADE}/${id}`,
+        url: buildRoute(FINAL_GRADE_CONTROLLER, FINAL_GRADE_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),

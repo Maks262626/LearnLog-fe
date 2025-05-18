@@ -1,5 +1,6 @@
 import { User } from '@/models/User';
-import { routes } from '@/routes';
+
+import { USER_CONTROLLER, USER_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getAllUsers: build.query<{ data: User[] }, void>({
       query: () => {
         return {
-          url: routes.API.USER,
+          url: buildRoute(USER_CONTROLLER, USER_ROUTES.FIND_ALL_USERS),
           method: 'GET',
         };
       },
@@ -20,7 +21,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getUsersFromFaculty: build.query<{ data: User[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.USER}/faculty/${id}`,
+          url: buildRoute(USER_CONTROLLER, USER_ROUTES.FIND_USERS_FROM_FACULTY, { id }),
           method: 'GET',
         };
       },
@@ -32,7 +33,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getUsersFromGroup: build.query<{ data: User[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.USER}/group/${id}`,
+          url: buildRoute(USER_CONTROLLER, USER_ROUTES.FIND_USERS_FROM_GROUP, { id }),
           method: 'GET',
         };
       },
@@ -43,14 +44,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     getUserById: build.query<{ data: User }, string>({
       query: (id) => ({
-        url: `${routes.API.USER}/${id}`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.FIND_USER, { id }),
         method: 'GET',
       }),
       providesTags: (_result, _error, id) => [{ type: 'USERS', id }],
     }),
     getMe: build.query<{ data: User }, void>({
       query: () => ({
-        url: `${routes.API.USER}/me`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.ME),
         method: 'GET',
       }),
       providesTags: [{ type: 'USERS', id: 'ME' }],
@@ -58,14 +59,14 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     getTeachersByFacultyId: build.query<{ data: User[] }, string>({
       query: (id) => ({
-        url: `${routes.API.USER}/teachers/${id}`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.GET_TEACHERS_BY_FACULTY_ID, { id }),
         method: 'GET',
       }),
       providesTags: (_result, _error, id) => [{ type: 'USERS', id }],
     }),
     getUsersInMyGroup: build.query<{ data: User[] }, void>({
       query: () => ({
-        url: `${routes.API.USER}/in-my-group`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.GET_USERS_IN_MY_GROUP),
         method: 'GET',
       }),
       providesTags: (result) =>
@@ -75,7 +76,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     updateUserRole: build.mutation<void, { id: string; role: string }>({
       query: ({ id, role }) => ({
-        url: `${routes.API.USER}/role/${id}`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.SET_USER_ROLE, { id }),
         method: 'PATCH',
         body: { role },
       }),
@@ -84,7 +85,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     registerUser: build.mutation<User, Partial<User>>({
       query(body) {
         return {
-          url: 'user/register',
+          url: buildRoute(USER_CONTROLLER, USER_ROUTES.REGISTER),
           method: 'POST',
           body,
         };
@@ -93,7 +94,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     }),
     deleteUser: build.mutation<void, string>({
       query: (id) => ({
-        url: `${routes.API.USER}/${id}`,
+        url: buildRoute(USER_CONTROLLER, USER_ROUTES.DELETE_USER, { id }),
         method: 'DELETE',
       }),
       invalidatesTags: (_, __, id) => [

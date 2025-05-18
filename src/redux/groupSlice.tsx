@@ -1,5 +1,6 @@
 import { Group } from '@/models/Group';
-import { routes } from '@/routes';
+
+import { GROUP_CONTROLLER, GROUP_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     getGroups: build.query<{ data: Group[] }, void>({
       query: () => {
         return {
-          url: routes.API.GROUP,
+          url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.FIND_ALL),
           method: 'GET',
         };
       },
@@ -20,7 +21,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     getGroupById: build.query<{ data: Group }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.GROUP}/${id}`,
+          url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },
@@ -29,7 +30,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     getGroupsByFacultyId: build.query<{ data: Group[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.GROUP}/get-by-faculty-id/${id}`,
+          url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.FIND_BY_FACULTY_ID, { id }),
           method: 'GET',
         };
       },
@@ -41,7 +42,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     getGroupsInMyFaculty: build.query<{ data: Group[] }, void>({
       query: () => {
         return {
-          url: `${routes.API.GROUP}/get-in-my-faculty`,
+          url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.FIND_IN_MY_FACULTY),
           method: 'GET',
         };
       },
@@ -52,7 +53,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     }),
     createGroup: build.mutation<{ data: Group }, Partial<Group>>({
       query: (body) => ({
-        url: routes.API.GROUP,
+        url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.CREATE),
         method: 'POST',
         body,
       }),
@@ -60,7 +61,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     }),
     updateGroup: build.mutation<{ data: Group }, { id: string; body: Partial<Group> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.GROUP}/${id}`,
+        url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),
@@ -71,7 +72,7 @@ export const groupApiSlice = apiSlice.injectEndpoints({
     }),
     deleteGroup: build.mutation<void, string>({
       query: (id) => ({
-        url: `${routes.API.GROUP}/${id}`,
+        url: buildRoute(GROUP_CONTROLLER, GROUP_ROUTES.REMOVE, { id }),
         method: 'DELETE',
       }),
       invalidatesTags: (_, __, id) => [

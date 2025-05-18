@@ -1,5 +1,6 @@
 import { Grade } from '@/models/Grade';
-import { routes } from '@/routes';
+
+import { GRADE_CONTROLLER, GRADE_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -7,7 +8,7 @@ export const gradeApiSlice = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getGradesByAssignmentId: build.query<{ data: Grade[] }, string>({
       query: (id) => ({
-        url: `${routes.API.GRADE}/by-assignment-id/${id}`,
+        url: buildRoute(GRADE_CONTROLLER, GRADE_ROUTES.FIND_BY_ASSIGNMENT, { id }),
         method: 'GET',
       }),
       providesTags: (result) =>
@@ -17,13 +18,13 @@ export const gradeApiSlice = apiSlice.injectEndpoints({
     }),
     getGradeByUserIdAndAssignmentId: build.query<{ data: Grade }, { userId: string; assignmentId: string }>({
       query: ({ userId, assignmentId }) => ({
-        url: `${routes.API.GRADE}/by-user-assignment-id/${userId}/${assignmentId}`,
+        url: buildRoute(GRADE_CONTROLLER, GRADE_ROUTES.FIND_BY_USER_ASSIGNMENT, { userId, assignmentId }),
         method: 'GET',
       }),
     }),
     createGrade: build.mutation<{ data: Grade }, Partial<Grade>>({
       query: (body) => ({
-        url: routes.API.GRADE,
+        url: buildRoute(GRADE_CONTROLLER, GRADE_ROUTES.CREATE),
         method: 'POST',
         body,
       }),
@@ -31,7 +32,7 @@ export const gradeApiSlice = apiSlice.injectEndpoints({
     }),
     updateGrade: build.mutation<{ data: Grade }, { id: string; body: Partial<Grade> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.GRADE}/${id}`,
+        url: buildRoute(GRADE_CONTROLLER, GRADE_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),

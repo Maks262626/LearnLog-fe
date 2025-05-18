@@ -1,6 +1,6 @@
 import { Attendance } from '@/models/Attendance';
-import { User } from '@/models/User';
-import { routes } from '@/routes';
+
+import { ATTENDANCE_CONTROLLER, ATTENDANCE_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -9,7 +9,7 @@ export const attendanceApiSlice = apiSlice.injectEndpoints({
     getAttendanceBySubjectInstanceId: build.query<{ data: Attendance[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.ATTENDANCE}/subject-instance/${id}`,
+          url: buildRoute(ATTENDANCE_CONTROLLER, ATTENDANCE_ROUTES.GET_BY_SUBJECT_INSTANCE_ID, { id }),
           method: 'GET',
         };
       },
@@ -18,24 +18,9 @@ export const attendanceApiSlice = apiSlice.injectEndpoints({
           ? [...result.data.map(({ id }) => ({ type: 'ATTENDANCE' as const, id })), { type: 'ATTENDANCE', id: 'LIST' }]
           : [{ type: 'ATTENDANCE', id: 'LIST' }],
     }),
-    getAttendanceBySubjectId: build.query<{ data: { user: User; attendances: Attendance[] }[] }, string>({
-      query: (id) => {
-        return {
-          url: `${routes.API.ATTENDANCE}/by-subject-id/${id}`,
-          method: 'GET',
-        };
-      },
-      providesTags: (result) =>
-        result?.data
-          ? [
-              ...result.data.map(({ user }) => ({ type: 'ATTENDANCE' as const, id: user.id })),
-              { type: 'ATTENDANCE', id: 'LIST' },
-            ]
-          : [{ type: 'ATTENDANCE', id: 'LIST' }],
-    }),
     updateAttendance: build.mutation<{ data: Attendance }, { id: string; body: Partial<Attendance> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.ATTENDANCE}/${id}`,
+        url: buildRoute(ATTENDANCE_CONTROLLER, ATTENDANCE_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),
@@ -44,8 +29,4 @@ export const attendanceApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetAttendanceBySubjectInstanceIdQuery,
-  useUpdateAttendanceMutation,
-  useGetAttendanceBySubjectIdQuery,
-} = attendanceApiSlice;
+export const { useGetAttendanceBySubjectInstanceIdQuery, useUpdateAttendanceMutation } = attendanceApiSlice;

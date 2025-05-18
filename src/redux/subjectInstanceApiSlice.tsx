@@ -1,5 +1,6 @@
 import { Day, SubjectInstance } from '@/models/SubjectInstance';
-import { routes } from '@/routes';
+
+import { SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
     getSubjectInstanceById: build.query<{ data: SubjectInstance }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.SUBJECT_INSTANCE}/${id}`,
+          url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },
@@ -17,7 +18,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
     getSubjectInstancesBySubjectId: build.query<{ data: SubjectInstance[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.SUBJECT_INSTANCE}/by-subject-id/${id}`,
+          url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.BY_SUBJECT_ID, { id }),
           method: 'GET',
         };
       },
@@ -34,7 +35,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
       { id: string; start_date: string; end_date: string }
     >({
       query: ({ id, start_date, end_date }) => ({
-        url: `${routes.API.SUBJECT_INSTANCE}/by-group-id/${id}`,
+        url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.BY_GROUP_ID, { id }),
         method: 'GET',
         params: { start_date, end_date },
       }),
@@ -45,7 +46,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
       { start_date: string; end_date: string }
     >({
       query: ({ start_date, end_date }) => ({
-        url: `${routes.API.SUBJECT_INSTANCE}/in-my-group`,
+        url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.STUDENT_GROUP),
         method: 'GET',
         params: { start_date, end_date },
       }),
@@ -56,7 +57,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
       { start_date: string; end_date: string }
     >({
       query: ({ start_date, end_date }) => ({
-        url: `${routes.API.SUBJECT_INSTANCE}/teacher-schedule`,
+        url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.TEACHER_SCHEDULE),
         method: 'GET',
         params: { start_date, end_date },
       }),
@@ -65,7 +66,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
     createSubjectInstance: build.mutation<{ data: SubjectInstance }, Partial<SubjectInstance>>({
       query: (body) => {
         return {
-          url: routes.API.SUBJECT_INSTANCE,
+          url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.CREATE),
           method: 'POST',
           body,
         };
@@ -74,7 +75,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
     }),
     updateSubjectInstance: build.mutation<{ data: SubjectInstance }, { id: string; body: Partial<SubjectInstance> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.SUBJECT_INSTANCE}/${id}`,
+        url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),
@@ -82,7 +83,7 @@ export const subjectInstanceApiSlice = apiSlice.injectEndpoints({
     }),
     deleteSubjectInstance: build.mutation<void, string>({
       query: (id) => ({
-        url: `${routes.API.SUBJECT_INSTANCE}/${id}`,
+        url: buildRoute(SUBJECT_INSTANCE_CONTROLLER, SUBJECT_INSTANCE_ROUTES.DELETE, { id }),
         method: 'DELETE',
       }),
       invalidatesTags: (_, __, id) => [

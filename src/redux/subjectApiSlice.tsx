@@ -1,5 +1,6 @@
 import { Subject } from '@/models/Subject';
-import { routes } from '@/routes';
+
+import { SUBJECT_CONTROLLER, SUBJECT_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     getSubjectById: build.query<{ data: Subject }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.SUBJECT}/${id}`,
+          url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },
@@ -16,7 +17,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     }),
     createSubject: build.mutation<{ data: Subject }, Partial<Subject>>({
       query: (body) => ({
-        url: routes.API.SUBJECT,
+        url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.CREATE),
         method: 'POST',
         body,
       }),
@@ -24,7 +25,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     }),
     updateSubject: build.mutation<{ data: Subject }, { id: string; body: Partial<Subject> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.SUBJECT}/${id}`,
+        url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),
@@ -36,7 +37,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     getSubjectsInMyFaculty: build.query<{ data: Subject[] }, void>({
       query: () => {
         return {
-          url: `${routes.API.SUBJECT}/in-my-faculty`,
+          url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.GET_MY_COURSES),
           method: 'GET',
         };
       },
@@ -48,7 +49,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     getSubjectsInMyGroup: build.query<{ data: Subject[] }, void>({
       query: () => {
         return {
-          url: `${routes.API.SUBJECT}/in-my-group`,
+          url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.GET_SUBJECTS_IN_MY_GROUP),
           method: 'GET',
         };
       },
@@ -60,7 +61,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     getTeacherSubjects: build.query<{ data: Subject[] }, void>({
       query: () => {
         return {
-          url: `${routes.API.SUBJECT}/teacher-subject`,
+          url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.GET_TEACHER_SUBJECTS),
           method: 'GET',
         };
       },
@@ -72,7 +73,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     getSubjectsByGroupId: build.query<{ data: Subject[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.SUBJECT}/by-group-id/${id}`,
+          url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.GET_SUBJECTS_BY_GROUP_ID, { id }),
           method: 'GET',
         };
       },
@@ -83,7 +84,7 @@ export const subjectApiSlice = apiSlice.injectEndpoints({
     }),
     deleteSubject: build.mutation<void, string>({
       query: (id) => ({
-        url: `${routes.API.SUBJECT}/${id}`,
+        url: buildRoute(SUBJECT_CONTROLLER, SUBJECT_ROUTES.DELETE, { id }),
         method: 'DELETE',
       }),
       invalidatesTags: (_, __, id) => [

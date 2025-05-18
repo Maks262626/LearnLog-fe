@@ -1,5 +1,6 @@
 import { Faculty } from '@/models/Faculty';
-import { routes } from '@/routes';
+
+import { FACULTY_CONTROLLER, FACULTY_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const facultyApiSlice = apiSlice.injectEndpoints({
     getFaculties: build.query<{ data: Faculty[] }, void>({
       query: () => {
         return {
-          url: routes.API.FACULTY,
+          url: buildRoute(FACULTY_CONTROLLER, FACULTY_ROUTES.FIND_ALL),
           method: 'GET',
         };
       },
@@ -20,7 +21,7 @@ export const facultyApiSlice = apiSlice.injectEndpoints({
     getFacultiesInMyUniversity: build.query<{ data: Faculty[] }, void>({
       query: () => {
         return {
-          url: `${routes.API.FACULTY}/get-faculties-in-my-uni`,
+          url: buildRoute(FACULTY_CONTROLLER, FACULTY_ROUTES.FIND_FACULTIES_IN_MY_UNI),
           method: 'GET',
         };
       },
@@ -32,7 +33,7 @@ export const facultyApiSlice = apiSlice.injectEndpoints({
     getFacultyById: build.query<{ data: Faculty }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.FACULTY}/${id}`,
+          url: buildRoute(FACULTY_CONTROLLER, FACULTY_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },
@@ -41,7 +42,7 @@ export const facultyApiSlice = apiSlice.injectEndpoints({
     getFacultiesByUniversityId: build.query<{ data: Faculty[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.FACULTY}/get-by-uni-id/${id}`,
+          url: buildRoute(FACULTY_CONTROLLER, FACULTY_ROUTES.FIND_BY_UNI_ID, { id }),
           method: 'GET',
         };
       },

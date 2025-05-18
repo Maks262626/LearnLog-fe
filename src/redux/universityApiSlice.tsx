@@ -1,5 +1,6 @@
 import { University } from '@/models/University';
-import { routes } from '@/routes';
+
+import { UNIVERSITY_CONTROLLER, UNIVERSITY_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const universityApiSlice = apiSlice.injectEndpoints({
     getUniversities: build.query<{ data: University[] }, void>({
       query: () => {
         return {
-          url: routes.API.UNIVERSITY,
+          url: buildRoute(UNIVERSITY_CONTROLLER, UNIVERSITY_ROUTES.FIND_ALL),
           method: 'GET',
         };
       },
@@ -20,7 +21,7 @@ export const universityApiSlice = apiSlice.injectEndpoints({
     getUniversityById: build.query<{ data: University }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.UNIVERSITY}/${id}`,
+          url: buildRoute(UNIVERSITY_CONTROLLER, UNIVERSITY_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },

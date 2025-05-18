@@ -1,5 +1,7 @@
 import { routes } from '@/routes';
 
+import { REPORTS_CONTROLLER, REPORTS_ROUTES, buildRoute } from './apiEndpoints';
+
 const downloadResponceAsFile = async (res: Response, link: string) => {
   try {
     const blob = await res.blob();
@@ -23,7 +25,11 @@ const downloadResponceAsFile = async (res: Response, link: string) => {
 const fetchGroupAttendanceSummaryXlsx = async (groupId: string) => {
   try {
     const token = localStorage.getItem('token');
-    const api_url = `${routes.API.BASE}${routes.API.REPORTS}/student-group-attendance-summary/xlsx/${groupId}`;
+    const api_url = buildRoute(
+      `${routes.API.BASE}/${REPORTS_CONTROLLER}`,
+      REPORTS_ROUTES.STUDENT_GROUP_ATTENDANCE_SUMMARY_XLSX,
+      { id: groupId },
+    );
     const res = await fetch(api_url, {
       method: 'GET',
       headers: {
@@ -39,7 +45,11 @@ const fetchGroupAttendanceSummaryXlsx = async (groupId: string) => {
 const fetchGroupAttendanceIndividualPdf = async (groupId: string) => {
   try {
     const token = localStorage.getItem('token');
-    const api_url = `${routes.API.BASE}${routes.API.REPORTS}/student-group-attendance-individual/pdf/${groupId}`;
+    const api_url = buildRoute(
+      `${routes.API.BASE}/${REPORTS_CONTROLLER}`,
+      REPORTS_ROUTES.STUDENT_GROUP_ATTENDANCE_INDIVIDUAL_PDF,
+      { id: groupId },
+    );
     const res = await fetch(api_url, {
       method: 'GET',
       headers: {
@@ -55,7 +65,11 @@ const fetchGroupAttendanceIndividualPdf = async (groupId: string) => {
 const fetchGroupGradeSummaryXlsx = async (groupId: string) => {
   try {
     const token = localStorage.getItem('token');
-    const api_url = `${routes.API.BASE}${routes.API.REPORTS}/student-group-grade-summary/xlsx/${groupId}`;
+    const api_url = buildRoute(
+      `${routes.API.BASE}/${REPORTS_CONTROLLER}`,
+      REPORTS_ROUTES.STUDENT_GROUP_GRADE_SUMMARY_XLSX,
+      { id: groupId },
+    );
     const res = await fetch(api_url, {
       method: 'GET',
       headers: {

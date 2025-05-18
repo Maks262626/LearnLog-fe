@@ -1,5 +1,6 @@
 import { Assignment } from '@/models/Assignment';
-import { routes } from '@/routes';
+
+import { ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES, buildRoute } from '@/utils/apiEndpoints';
 
 import { apiSlice } from './apiSlice';
 
@@ -8,7 +9,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
     getAssignmentsBySubjectId: build.query<{ data: Assignment[] }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.ASSIGNMENTS}/by-subject-id/${id}`,
+          url: buildRoute(ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES.FIND_BY_SUBJECT_ID, { id }),
           method: 'GET',
         };
       },
@@ -23,7 +24,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
     getAssignmentById: build.query<{ data: Assignment }, string>({
       query: (id) => {
         return {
-          url: `${routes.API.ASSIGNMENTS}/${id}`,
+          url: buildRoute(ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES.FIND_ONE, { id }),
           method: 'GET',
         };
       },
@@ -31,7 +32,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
     }),
     createAssignment: build.mutation<{ data: Assignment }, Partial<Assignment>>({
       query: (body) => ({
-        url: routes.API.ASSIGNMENTS,
+        url: buildRoute(ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES.CREATE),
         method: 'POST',
         body,
       }),
@@ -39,7 +40,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
     }),
     updateAssignment: build.mutation<{ data: Assignment }, { id: string; body: Partial<Assignment> }>({
       query: ({ id, body }) => ({
-        url: `${routes.API.ASSIGNMENTS}/${id}`,
+        url: buildRoute(ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES.UPDATE, { id }),
         method: 'PATCH',
         body,
       }),
@@ -50,7 +51,7 @@ export const assignmentsApiSlice = apiSlice.injectEndpoints({
     }),
     deleteAssignment: build.mutation<void, string>({
       query: (id) => ({
-        url: `${routes.API.ASSIGNMENTS}/${id}`,
+        url: buildRoute(ASSIGNMENT_CONTROLLER, ASSIGNMENT_ROUTES.REMOVE, { id }),
         method: 'DELETE',
       }),
       invalidatesTags: (_, __, id) => [
