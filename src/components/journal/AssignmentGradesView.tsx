@@ -9,7 +9,7 @@ import { GradeValidationType } from '@/utils/zod-validation';
 
 import { useUpdateGradeMutation } from '@/redux/gradeApiSlice';
 
-import GradeModal from './Modals/GradeModal';
+import GradeModal from '../Modals/GradeModal';
 
 const CELL_SIZE = 60;
 

@@ -1,7 +1,7 @@
 import { StudentGradesReports } from '@/types/Reports';
 import { Box, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
-import GradeLineChart from '@/pages/student/GradeLineChart';
+import GradeLineChart from '../common/GradeLineChart';
 
 interface IGradesView {
   data: StudentGradesReports[];

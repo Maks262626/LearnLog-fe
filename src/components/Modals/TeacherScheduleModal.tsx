@@ -6,8 +6,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import PreviewIcon from '@mui/icons-material/Visibility';
 import { Box, IconButton, Modal, Tab, Tabs } from '@mui/material';
 
-import AttendanceManage from '../Attendance';
 import SubjectInstanceCard from '../Cards/SubjectInstanceCard';
+import AttendanceManage from '../attendance/Attendance';
 
 interface ITeacherScheduleModal {
   open: boolean;

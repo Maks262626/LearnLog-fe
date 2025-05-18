@@ -4,9 +4,9 @@ import GridOnIcon from '@mui/icons-material/GridOn';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
-import AttendanceReport from '@/components/AttendanceGroupView';
-import AttendancesView from '@/components/AttendancesView';
-import GradesView from '@/components/GradesView';
+import AttendanceReport from '@/components/attendance/AttendanceGroupView';
+import AttendancesView from '@/components/attendance/AttendancesView';
+import GradesView from '@/components/journal/GradesView';
 
 import {
   downloadGroupAttendanceIndividualPdf,

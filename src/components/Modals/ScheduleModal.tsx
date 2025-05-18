@@ -11,9 +11,9 @@ import { SubjectInstanceValidationType } from '@/utils/zod-validation';
 
 import { useDeleteSubjectInstanceMutation } from '@/redux/subjectInstanceApiSlice';
 
-import AttendanceManage from '../Attendance';
 import SubjectInstanceCard from '../Cards/SubjectInstanceCard';
 import SubjectInstanceForm from '../Forms/SubjectInstanceForm';
+import AttendanceManage from '../attendance/Attendance';
 
 interface IScheduleModal {
   open: boolean;

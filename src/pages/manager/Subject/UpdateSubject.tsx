@@ -3,8 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { routes } from '@/routes';
 import { Box } from '@mui/material';
 
-import DangerZone from '@/components/DangerZone';
 import Loader from '@/components/common/Loader';
+import DangerZone from '@/components/settings/DangerZone';
 
 import { SubjectValidationType } from '@/utils/zod-validation';
 

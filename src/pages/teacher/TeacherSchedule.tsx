@@ -6,8 +6,8 @@ import { Box } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 
 import TeacherScheduleModal from '@/components/Modals/TeacherScheduleModal';
-import WeekDateRangePicker from '@/components/WeekDateRangePicker';
-import WeekView from '@/components/WeekView';
+import WeekDateRangePicker from '@/components/common/WeekDateRangePicker';
+import WeekView from '@/components/common/WeekView';
 
 import { getStartEndWeekDates } from '@/utils/dateService';
 

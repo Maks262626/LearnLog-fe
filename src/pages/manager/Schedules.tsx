@@ -6,8 +6,8 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEve
 import dayjs, { Dayjs } from 'dayjs';
 
 import ScheduleModal from '@/components/Modals/ScheduleModal';
-import WeekDateRangePicker from '@/components/WeekDateRangePicker';
-import WeekView from '@/components/WeekView';
+import WeekDateRangePicker from '@/components/common/WeekDateRangePicker';
+import WeekView from '@/components/common/WeekView';
 
 import { getStartEndWeekDates } from '@/utils/dateService';
 import { SubjectInstanceValidationType } from '@/utils/zod-validation';

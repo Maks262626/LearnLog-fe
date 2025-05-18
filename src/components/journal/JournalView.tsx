@@ -6,7 +6,7 @@ import { User } from '@/models/User';
 import { Box, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
-import TeacherScheduleModal from './Modals/TeacherScheduleModal';
+import TeacherScheduleModal from '../Modals/TeacherScheduleModal';
 
 const CELL_SIZE = 60;
 

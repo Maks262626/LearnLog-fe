@@ -7,8 +7,8 @@ import { Box, IconButton, Modal } from '@mui/material';
 import dayjs, { Dayjs } from 'dayjs';
 
 import SubjectInstanceCard from '@/components/Cards/SubjectInstanceCard';
-import WeekDateRangePicker from '@/components/WeekDateRangePicker';
-import WeekView from '@/components/WeekView';
+import WeekDateRangePicker from '@/components/common/WeekDateRangePicker';
+import WeekView from '@/components/common/WeekView';
 
 import { getStartEndWeekDates } from '@/utils/dateService';
 

@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 
-import AssignmentGradesView from '@/components/AssignmentGradesView';
-import JournalView from '@/components/JournalView';
+import AssignmentGradesView from '@/components/journal/AssignmentGradesView';
+import JournalView from '@/components/journal/JournalView';
 
 import { useGetAssignmentsBySubjectIdQuery } from '@/redux/assignmentsApiSlice';
 import { useGetTeacherSubjectsQuery } from '@/redux/subjectApiSlice';

@@ -1,6 +1,6 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
 
-import AttendancesView from '@/components/AttendancesView';
+import AttendancesView from '@/components/attendance/AttendancesView';
 
 import { useGetStudentAttendancesReportQuery } from '@/redux/reportsApiSlice';
 

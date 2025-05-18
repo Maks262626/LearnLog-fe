@@ -1,6 +1,6 @@
 import { Alert, Box, CircularProgress } from '@mui/material';
 
-import GradesView from '@/components/GradesView';
+import GradesView from '@/components/journal/GradesView';
 
 import { useGetStudentGradesReportQuery } from '@/redux/reportsApiSlice';
 
