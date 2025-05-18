@@ -35,32 +35,28 @@ const SubjectFinalGrades = () => {
 
   return (
     <Box sx={{ overflowX: 'auto', px: 4 }}>
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: `150px 50px`,
-          gap: '4px',
-          mb: 1,
-        }}
-      >
-        <Box sx={{ fontWeight: 'bold' }}>Students</Box>
-      </Box>
-
       {subject?.data.finalGrades.map((grade, index) => (
         <Box
           key={grade.id}
           sx={{
             display: 'grid',
-            gridTemplateColumns: `150px 50px`,
-            gap: '4px',
-            mb: 1,
+            gridTemplateColumns: `200px ${CELL_SIZE}px`,
+            gap: 1,
+            alignItems: 'center',
+            py: 1,
+            borderBottom: '1px solid #e5e7eb',
+            '&:hover': {
+              backgroundColor: '#edff0045',
+            },
           }}
         >
           <Box
             sx={{
+              px: 1,
               fontWeight: 500,
-              display: 'flex',
-              alignItems: 'center',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
             }}
           >
             {index + 1}. {grade.user.first_name} {grade.user.last_name}
@@ -73,13 +69,15 @@ const SubjectFinalGrades = () => {
               borderRadius: '8px',
               backgroundColor: 'background.paper',
               boxShadow: 'inset 0 0 0 1px #c7d2fe',
+              color: 'white',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
               transition: 'background 0.2s',
               '&:hover': {
-                backgroundColor: 'primary.main',
+                backgroundColor: '#eae712',
+                color: 'black',
               },
             }}
           >
