@@ -25,8 +25,10 @@ import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
 
 import SubjectsGradesTableView from './SubjectGradeTableView';
 import SubjectsGradesView from './SubjectGradesView';
+import { useTranslation } from 'react-i18next';
 
 const Reports = () => {
+  const { t } = useTranslation();
   const { data: groups } = useGetGroupsInMyFacultyQuery();
 
   const [reportType, setReportType] = useState<'grades' | 'attendances' | 'individual'>('grades');
@@ -85,17 +87,17 @@ const Reports = () => {
       <Box sx={{ p: 2 }}>
         <Box sx={{ display: 'flex', gap: 4 }}>
           <FormControl sx={{ minWidth: 200, mb: 3 }}>
-            <InputLabel id="report-select-label">Report Type</InputLabel>
-            <Select labelId="report-select-label" value={reportType} label="Report Type" onChange={handleSelectType}>
-              <MenuItem value="grades">Get Grades</MenuItem>
-              <MenuItem value="attendances">Get Attendances</MenuItem>
-              <MenuItem value="individual">Get Stats By User</MenuItem>
+            <InputLabel id="report-select-label">{t('reports.type')}</InputLabel>
+            <Select labelId="report-select-label" value={reportType} label={t('reports.type')} onChange={handleSelectType}>
+              <MenuItem value="grades">{t('reports.grades')}</MenuItem>
+              <MenuItem value="attendances">{t('reports.attendances')}</MenuItem>
+              <MenuItem value="individual">{t('reports.stats')}</MenuItem>
             </Select>
           </FormControl>
 
           <FormControl sx={{ minWidth: 200, mb: 3 }}>
-            <InputLabel id="group-label">Group</InputLabel>
-            <Select label="Group" value={groupId ?? ''} onChange={handleSelectGroupChange}>
+            <InputLabel id="group-label">{t('group.name')}</InputLabel>
+            <Select label={t('group.name')} value={groupId ?? ''} onChange={handleSelectGroupChange}>
               {groups?.data.map((group) => (
                 <MenuItem key={group.id} value={group.id}>
                   {group.name}
@@ -106,8 +108,8 @@ const Reports = () => {
 
           {reportType === 'individual' && groupId && (
             <FormControl sx={{ minWidth: 200, mb: 3 }}>
-              <InputLabel id="user-label">User</InputLabel>
-              <Select label="User" value={userId ?? ''} onChange={handleSelectUser}>
+              <InputLabel id="user-label">{t('user.user')}</InputLabel>
+              <Select label={t('user.user')} value={userId ?? ''} onChange={handleSelectUser}>
                 {users?.data.map((user) => (
                   <MenuItem key={user.id} value={user.id}>
                     {user.first_name} {user.last_name}
@@ -119,15 +121,15 @@ const Reports = () => {
 
           {reportType === 'grades' && groupId && (
             <FormControl sx={{ minWidth: 200, mb: 3 }}>
-              <InputLabel id="report-select-label">Report View</InputLabel>
+              <InputLabel id="report-select-label">{t('reports.view')}</InputLabel>
               <Select
                 labelId="report-select-view-label"
                 value={viewType}
                 label="Report Type"
                 onChange={handleSelectView}
               >
-                <MenuItem value="view1">View1</MenuItem>
-                <MenuItem value="view2">View2</MenuItem>
+                <MenuItem value="view1">{t('general.view')}1</MenuItem>
+                <MenuItem value="view2">{t('general.view')}2</MenuItem>
               </Select>
             </FormControl>
           )}
@@ -141,10 +143,10 @@ const Reports = () => {
               startIcon={<PictureAsPdfIcon />}
               onClick={handleGroupAttendanceIndividualPdf}
             >
-              Download PDF
+              {t('reports.pdf')}
             </Button>
             <Button variant="outlined" color="success" startIcon={<GridOnIcon />} onClick={handleAttendanceXlsx}>
-              Download XLSX
+              {t('reports.xlsx')}
             </Button>
           </Box>
         )}
@@ -152,7 +154,7 @@ const Reports = () => {
         {reportType === 'grades' && groupId && (
           <Box sx={{ display: 'flex', gap: 2, py: 2 }}>
             <Button variant="outlined" color="success" startIcon={<GridOnIcon />} onClick={handleGradeXlsx}>
-              Download XLSX
+              {t('reports.xlsx')}
             </Button>
           </Box>
         )}

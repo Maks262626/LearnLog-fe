@@ -13,6 +13,7 @@ import { SubjectInstanceValidationType, subjectInstanceValidation } from '@/util
 
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
 import { useGetSubjectsByGroupIdQuery } from '@/redux/subjectApiSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ISubjectInstanceForm {
   onSubmit: (data: SubjectInstanceValidationType) => void;
@@ -21,12 +22,13 @@ interface ISubjectInstanceForm {
 }
 
 const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubjectInstanceForm) => {
+  const { t } = useTranslation();
   const { data: groups } = useGetGroupsInMyFacultyQuery();
   const [groupId, setGroupId] = useState<string | undefined>(subjectInstance?.subject.group.id ?? undefined);
   const { data: subjects } = useGetSubjectsByGroupIdQuery(groupId!, { skip: !groupId || Boolean(subjectInstance) });
 
   const defaultValues = {
-    name: `Lesson ${new Date().toLocaleDateString()}`,
+    name: `${new Date().toLocaleDateString()}`,
     subject_id: '',
     date: new Date(),
     start_time: '',
@@ -59,8 +61,8 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
   return (
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'grid', placeItems: 'center', gap: 3 }}>
       <FormControl fullWidth>
-        <InputLabel id="group-label">Group</InputLabel>
-        <Select label="Group" value={groupId} onChange={handleSelectChange} disabled={Boolean(subjectInstance)}>
+        <InputLabel id="group-label">{t('group.name')}</InputLabel>
+        <Select label={t('group.name')} value={groupId} onChange={handleSelectChange} disabled={Boolean(subjectInstance)}>
           {groups?.data.map((group) => (
             <MenuItem key={group.id} value={group.id}>
               {group.name}
@@ -73,11 +75,11 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="subject-label">Subject</InputLabel>
+            <InputLabel id="subject-label">{t('subject.name')}</InputLabel>
             <Select
               {...field}
               error={!!errors.subject_id}
-              label="Subject"
+              label={t('subject.name')}
               disabled={Boolean(subjectInstance)}
               onChange={(event) => {
                 const value = event.target.value;
@@ -102,7 +104,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         render={({ field }) => (
           <TextField
             {...field}
-            label={'Subject Name'}
+            label={t('subject.name')}
             error={!!errors.name}
             helperText={errors.name?.message}
             variant="outlined"
@@ -130,7 +132,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
           render={({ field }) => (
             <TimeField
               {...field}
-              label={'start time'}
+              label={t('subjectInstance.startTime')}
               format="HH:mm"
               value={field.value ? dayjs(field.value, 'HH:mm') : null}
               onChange={(newValue: Dayjs | null) => {
@@ -145,7 +147,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
           render={({ field }) => (
             <TimeField
               {...field}
-              label={'end time'}
+              label={t('subjectInstance.endTime')}
               format="HH:mm"
               value={field.value ? dayjs(field.value, 'HH:mm') : null}
               onChange={(newValue: Dayjs | null) => {
@@ -161,11 +163,11 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="type-label">Type</InputLabel>
+            <InputLabel id="type-label">{t('general.type')}</InputLabel>
             <Select
               {...field}
               error={!!errors.type}
-              label="Type"
+              label={t('general.type')}
               onChange={(event) => {
                 const value = event.target.value;
                 field.onChange(value);
@@ -173,7 +175,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
             >
               {Object.values(SubjectInstanceType).map((status) => (
                 <MenuItem key={status} value={status}>
-                  {status.toUpperCase()}
+                  {t(`subjectInstance.type.${status}`)}
                 </MenuItem>
               ))}
             </Select>
@@ -186,11 +188,11 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="status-label">Status</InputLabel>
+            <InputLabel id="status-label">{t('general.status')}</InputLabel>
             <Select
               {...field}
               error={!!errors.status}
-              label="Status"
+              label={t('general.status')}
               onChange={(event) => {
                 const value = event.target.value;
                 field.onChange(value);
@@ -198,7 +200,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
             >
               {Object.values(SubjectInstanceStatus).map((status) => (
                 <MenuItem key={status} value={status}>
-                  {status.toUpperCase()}
+                  {t(`subjectInstance.status.${status}`)}
                 </MenuItem>
               ))}
             </Select>
@@ -212,7 +214,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         render={({ field }) => (
           <TextField
             {...field}
-            label={'URL'}
+            label={t('subjectInstance.url')}
             error={!!errors.url}
             helperText={errors.url?.message}
             variant="outlined"
@@ -226,7 +228,7 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
         render={({ field }) => (
           <TextField
             {...field}
-            label={'Location'}
+            label={t('subjectInstance.location')}
             error={!!errors.location}
             helperText={errors.location?.message}
             variant="outlined"
@@ -236,10 +238,10 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
       />
       <Box sx={{ display: 'flex', gap: 2 }}>
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={!isValid}>
-          Save
+          {t('buttons.save')}
         </Button>
         <Button variant="contained" color="error" sx={{ mt: 2 }} disabled={!isValid} onClick={handleDelete}>
-          Delete
+          {t('buttons.delete')}
         </Button>
       </Box>
     </Box>

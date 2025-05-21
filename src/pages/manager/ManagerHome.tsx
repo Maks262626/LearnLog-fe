@@ -1,13 +1,16 @@
 import { routes } from '@/routes';
 
 import TileList from '@/components/Lists/TileList';
+import { useTranslation } from 'react-i18next';
 
 const ManagerHome = () => {
+  const { t } = useTranslation();
+
   const tileData = [
-    { title: 'Grops', description: 'Manage Groups', path: routes.PUBLIC.GROUP },
-    { title: 'Subjects', description: 'Manage Subjects', path: routes.PUBLIC.SUBJECT },
-    { title: 'Schedules', description: 'Manage all group schedules', path: routes.PUBLIC.SCHEDULES },
-    { title: 'Reports', description: 'Manage all reports', path: routes.PUBLIC.REPORTS },
+    { title: t('manager.group'), path: routes.PUBLIC.GROUP },
+    { title: t('manager.subject'), path: routes.PUBLIC.SUBJECT },
+    { title: t('manager.schedule'), path: routes.PUBLIC.SCHEDULES },
+    { title: t('manager.report'), path: routes.PUBLIC.REPORTS },
   ];
 
   return <TileList tileData={tileData} />;

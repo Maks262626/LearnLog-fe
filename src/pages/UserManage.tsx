@@ -27,10 +27,12 @@ import { useGetFacultyByIdQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupByIdQuery } from '@/redux/groupSlice';
 import { useGetUniversityByIdQuery } from '@/redux/universityApiSlice';
 import { useDeleteUserMutation, useGetUserByIdQuery, useUpdateUserRoleMutation } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const UserManage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const { data: user, isLoading, error, refetch } = useGetUserByIdQuery(id!, { skip: !id });
   const { data: university } = useGetUniversityByIdQuery(user?.data.university_id!, { skip: !user });
@@ -50,9 +52,9 @@ const UserManage = () => {
     }
   }, [user]);
 
-  if (!id) return <Typography>No user ID provided.</Typography>;
+  if (!id) return <Typography>{t('errors.NoId')}</Typography>;
   if (isLoading) return <Loader />;
-  if (error || !user?.data) return <Typography>Error fetching user data.</Typography>;
+  if (error || !user?.data) return <Typography>{t('errors.fetch')}</Typography>;
 
   const handleRoleChange = (event: SelectChangeEvent<UserRoleName>) => {
     setSelectedRole(event.target.value as UserRoleName);
@@ -78,32 +80,31 @@ const UserManage = () => {
 
   return (
     <Box sx={{ maxWidth: 500, mx: 'auto', mt: 4 }}>
-      {/* User Details */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h5" gutterBottom>
-          User Details
+          {t('user.details')}
         </Typography>
         <Typography>
-          <strong>First Name:</strong> {user.data.first_name}
+          <strong>{t('user.firstName')}:</strong> {user.data.first_name}
         </Typography>
         <Typography>
-          <strong>Last Name:</strong> {user.data.last_name}
+          <strong>{t('user.lastName')}:</strong> {user.data.last_name}
         </Typography>
         <Typography>
-          <strong>University ID:</strong> {university?.data.name || 'N/A'}
+          <strong>{t('profile.university')}:</strong> {university?.data.name || t('errors.NA')}
         </Typography>
         <Typography>
-          <strong>Faculty ID:</strong> {faculty?.data.name || 'N/A'}
+          <strong>{t('profile.faculty')}:</strong> {faculty?.data.name || t('errors.NA')}
         </Typography>
         <Typography>
-          <strong>Group ID:</strong> {group?.data.name || 'N/A'}
+          <strong>{t('profile.group')}:</strong> {group?.data.name || t('errors.NA')}
         </Typography>
         <Typography>
-          <strong>Current Role</strong> {user.data.role || 'N/A'}
+          <strong>{t('profile.role')}</strong> {user.data.role || t('errors.NA')}
         </Typography>
         <Box display="flex" alignItems="center" mt={2}>
           <Typography>
-            <strong>Approved:</strong>
+            <strong>{t('buttons.approve')}:</strong>
           </Typography>
           <Box
             sx={{
@@ -117,10 +118,9 @@ const UserManage = () => {
         </Box>
       </Paper>
 
-      {/* Role Management */}
       <Paper sx={{ p: 3, mb: 3 }}>
         <Typography variant="h6" gutterBottom>
-          Manage Role
+          {t('user.manageRole')}
         </Typography>
         <FormControl fullWidth sx={{ mt: 1 }}>
           <InputLabel>Role</InputLabel>
@@ -138,33 +138,31 @@ const UserManage = () => {
         </Button>
       </Paper>
 
-      {/* Danger Zone */}
       <Paper sx={{ p: 3, border: '1px solid red', backgroundColor: '#ffebee' }}>
         <Typography variant="h6" gutterBottom color="error">
-          Danger Zone
+          {t('general.dangerZone')}
         </Typography>
         <Typography variant="body2" color="error" gutterBottom>
-          Deleting this user is irreversible. This action cannot be undone.
+          {t('user.irreversibleDelete')}
         </Typography>
         <Button variant="contained" color="error" sx={{ mt: 2 }} onClick={handleOpenDeleteDialog}>
-          Delete User
+          {t('user.deleteUser')}
         </Button>
       </Paper>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
-        <DialogTitle>Confirm User Deletion</DialogTitle>
+        <DialogTitle>{t('user.dialog.confirmDeletionTitle')}</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to delete this user? This action cannot be undone.
+            {t('user.dialog.confirmDeletionText')}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog} color="primary">
-            Cancel
+            {t('buttons.cancel')}
           </Button>
           <Button onClick={handleDelete} color="error" variant="contained">
-            Delete
+            {t('buttons.delete')}
           </Button>
         </DialogActions>
       </Dialog>

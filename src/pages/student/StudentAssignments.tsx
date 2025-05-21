@@ -10,10 +10,12 @@ import StudentSubmissionList from '@/components/Lists/StudentSubmissionList';
 import { useGetAssignmentsBySubjectIdQuery } from '@/redux/assignmentsApiSlice';
 import { useGetStudentSubmissionBySubjectIdQuery } from '@/redux/studentSubmissionApiSlice';
 import { useGetSubjectsInMyGroupQuery } from '@/redux/subjectApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const StudentAssignments = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const {t} = useTranslation();
   const state = location.state as { subjectId?: string };
   const [subjectId, setSubjectId] = useState<string | null>(state.subjectId ?? null);
   const { data: subjects } = useGetSubjectsInMyGroupQuery();
@@ -33,7 +35,7 @@ const StudentAssignments = () => {
     <Box sx={{ px: 2 }}>
       <Box sx={{ display: 'inline-flex', gap: 3, flexDirection: 'column', mb: 5 }}>
         <FormControl sx={{ width: 300 }}>
-          <InputLabel id="group-label">Subjects</InputLabel>
+          <InputLabel id="group-label">{t('student.subject')}</InputLabel>
           <Select label="Group" value={subjectId ?? ''} onChange={handleSelectGroupChange}>
             {subjects?.data.map((subject) => (
               <MenuItem key={subject.id} value={subject.id}>
@@ -44,7 +46,7 @@ const StudentAssignments = () => {
         </FormControl>
       </Box>
       {assigments && <AssignmentCardList assignments={assigments.data} handleClick={handleClick} />}
-      {assigments && assigments.data.length === 0 && <Typography>No Assignments yet</Typography>}
+      {assigments && assigments.data.length === 0 && <Typography>{t('assignment.noAssignment')}</Typography>}
       {submissions && <StudentSubmissionList submissions={submissions.data} />}
     </Box>
   );

@@ -28,10 +28,11 @@ import { useGetFacultiesByUniversityIdQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupsByFacultyIdQuery } from '@/redux/groupSlice';
 import { useGetUniversitiesQuery } from '@/redux/universityApiSlice';
 import { useRegisterUserMutation } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   const { data: universities } = useGetUniversitiesQuery();
   const [selectedUniversity, setSelectedUniversity] = useState<string | null>(null);
 
@@ -95,7 +96,7 @@ const RegisterForm = () => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={'First Name'}
+              label={t('user.firstName')}
               error={!!errors.first_name}
               helperText={errors.first_name?.message}
               variant="outlined"
@@ -109,7 +110,7 @@ const RegisterForm = () => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Last Name'}
+              label={t('user.lastName')}
               error={!!errors.last_name}
               helperText={errors.last_name?.message}
               variant="outlined"
@@ -119,7 +120,7 @@ const RegisterForm = () => {
         />
       </Box>
       <FormControl component="fieldset">
-        <FormLabel component="legend">Role</FormLabel>
+        <FormLabel component="legend">{t('profile.role')}</FormLabel>
         <RadioGroup
           row
           value={selectedRole}
@@ -130,9 +131,9 @@ const RegisterForm = () => {
             setValue('group_id', '');
           }}
         >
-          <FormControlLabel value="manager" control={<Radio />} label="Manager" />
-          <FormControlLabel value="teacher" control={<Radio />} label="Teacher" />
-          <FormControlLabel value="student" control={<Radio />} label="Student" />
+          <FormControlLabel value="manager" control={<Radio />} label={t('user.roles.manager')} />
+          <FormControlLabel value="teacher" control={<Radio />} label={t('user.roles.teacher')}/>
+          <FormControlLabel value="student" control={<Radio />} label={t('user.roles.student')} />
         </RadioGroup>
       </FormControl>
 
@@ -141,7 +142,7 @@ const RegisterForm = () => {
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="university-label">University</InputLabel>
+            <InputLabel id="university-label">{t('profile.university')}</InputLabel>
             <Select
               {...field}
               error={!!errors.university_id}
@@ -169,7 +170,7 @@ const RegisterForm = () => {
         control={control}
         render={({ field }) => (
           <FormControl fullWidth>
-            <InputLabel id="faculty-label">Faculty</InputLabel>
+            <InputLabel id="faculty-label">{t('profile.faculty')}</InputLabel>
             <Select
               {...field}
               value={field.value || ''}
@@ -198,8 +199,8 @@ const RegisterForm = () => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel id="group-label">Group</InputLabel>
-              <Select {...field} value={field.value || ''} error={!!errors.group_id} label="Group">
+              <InputLabel id="group-label">{t('profile.group')}</InputLabel>
+              <Select {...field} value={field.value || ''} error={!!errors.group_id} label={t('profile.group')}>
                 {groups?.data.map((group) => (
                   <MenuItem key={group.id} value={group.id}>
                     {group.name}
@@ -219,7 +220,7 @@ const RegisterForm = () => {
         disabled={!isValid}
         sx={{ mt: 2 }}
       >
-        Save
+        {t('buttons.save')}
       </Button>
     </Paper>
   );

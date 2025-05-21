@@ -15,6 +15,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface AttendanceReportProps {
   data: StudentGroupAttendanceSummaryReport[];
@@ -31,6 +32,8 @@ const getStatusColor = (status: AttendanceStatus): Color => {
   return color;
 };
 const AttendanceReport = ({ data }: AttendanceReportProps) => {
+  const {t} = useTranslation();
+
   return (
     <Box>
       {data.map((subjectReport) => {
@@ -53,7 +56,7 @@ const AttendanceReport = ({ data }: AttendanceReportProps) => {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Student</TableCell>
+                    <TableCell>{t('user.roles.student')}</TableCell>
                     {allDates.map((date) => (
                       <TableCell key={date} align="center">
                         {date}

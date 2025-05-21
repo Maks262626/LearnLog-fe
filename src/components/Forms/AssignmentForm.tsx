@@ -9,6 +9,7 @@ import dayjs, { Dayjs } from 'dayjs';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { AssigmentValidationType, assigmentValidation } from '@/utils/zod-validation';
+import { useTranslation } from 'react-i18next';
 
 interface IAssignmentForm {
   onSubmit: (data: AssigmentValidationType) => void;
@@ -17,6 +18,7 @@ interface IAssignmentForm {
 }
 
 const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) => {
+  const {t} = useTranslation();
   const defaultValues = {
     subject_id: subjectId ?? '',
     name: '',
@@ -54,7 +56,7 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Assignment Name'}
+              label={t('assignment.name')}
               error={!!errors.name}
               helperText={errors.name?.message}
               variant="outlined"
@@ -62,20 +64,6 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
             />
           )}
         />
-        {/* <Controller
-          name="description"
-          control={control}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              label={'Description'}
-              error={!!errors.description}
-              helperText={errors.description?.message}
-              variant="outlined"
-              fullWidth
-            />
-          )}
-        /> */}
         <Controller
           name="description"
           control={control}
@@ -104,7 +92,7 @@ const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) =>
           )}
         />
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={!isValid}>
-          Save
+          {t('buttons.save')}
         </Button>
       </Box>
     </Box>

@@ -9,8 +9,10 @@ import { useGetAssignmentsBySubjectIdQuery } from '@/redux/assignmentsApiSlice';
 import { useGetTeacherSubjectsQuery } from '@/redux/subjectApiSlice';
 import { useGetSubjectInstancesBySubjectIdQuery } from '@/redux/subjectInstanceApiSlice';
 import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const TeacherJournal = () => {
+  const { t } = useTranslation();
   const [groupId, setGroupId] = useState<string | null>(null);
   const [subjectId, setSubjectId] = useState<string | null>(null);
 
@@ -33,8 +35,8 @@ const TeacherJournal = () => {
   return (
     <>
       <FormControl sx={{ width: 300, mb: 4 }}>
-        <InputLabel id="group-label">Subjects</InputLabel>
-        <Select label="Group" value={subjectId ?? ''} onChange={handleSelectGroupChange}>
+        <InputLabel id="group-label">{t('teacher.subject')}</InputLabel>
+        <Select label={t('group.name')} value={subjectId ?? ''} onChange={handleSelectGroupChange}>
           {subjects?.data.map((subject) => (
             <MenuItem key={subject.id} value={subject.id}>
               {subject.name} — {subject.group.name}
@@ -48,7 +50,7 @@ const TeacherJournal = () => {
 
       {!users && !subjectInstances && (
         <Typography variant="body2" mt={2}>
-          Please select a subject to view the journal.
+          {t('teacher.selectSubject')}
         </Typography>
       )}
     </>

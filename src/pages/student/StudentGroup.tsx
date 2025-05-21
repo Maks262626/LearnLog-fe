@@ -7,9 +7,11 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUsersInMyGroupQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const StudentGroup = () => {
   const { data: users, isLoading } = useGetUsersInMyGroupQuery();
+  const { t } = useTranslation();
 
   const columns: ColDef<User>[] = [
     {
@@ -18,8 +20,8 @@ const StudentGroup = () => {
       cellStyle: { fontWeight: 'bold', textAlign: 'center' },
       pinned: 'left',
     },
-    { field: 'first_name', headerName: 'First Name' },
-    { field: 'last_name', headerName: 'Last Name' },
+    { field: 'first_name', headerName: t('user.firstName') },
+    { field: 'last_name', headerName: t('user.lastName') },
   ];
 
   if (isLoading) {

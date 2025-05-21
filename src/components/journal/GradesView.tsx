@@ -2,16 +2,18 @@ import { StudentGradesReports } from '@/types/Reports';
 import { Box, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
 import GradeLineChart from '../common/GradeLineChart';
+import { useTranslation } from 'react-i18next';
 
 interface IGradesView {
   data: StudentGradesReports[];
 }
 
 const GradesView = ({ data }: IGradesView) => {
+  const {t} = useTranslation();
   return (
     <Box p={3}>
       <Typography variant="h4" gutterBottom>
-        Your Grades
+        {t('grade.your')}
       </Typography>
 
       <Box display="flex" flexDirection="column" gap={4}>
@@ -24,19 +26,19 @@ const GradesView = ({ data }: IGradesView) => {
 
               {subjectReport.finalGrade ? (
                 <Typography color="success.main" mb={2}>
-                  Final Grade: {subjectReport.finalGrade.final_grade}
+                  {t('finalGrade.name')}: {subjectReport.finalGrade.final_grade}
                 </Typography>
               ) : (
                 <Typography color="warning.main" mb={2}>
-                  Final Grade: Not assigned yet
+                  {t('finalGrade.notAssigned')}
                 </Typography>
               )}
 
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Assignment</TableCell>
-                    <TableCell>Grade</TableCell>
+                    <TableCell>{t('assignment.name')}</TableCell>
+                    <TableCell>{t('grade.name')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -44,7 +46,7 @@ const GradesView = ({ data }: IGradesView) => {
                     <TableRow>
                       <TableCell colSpan={2} align="center">
                         <Typography color="text.secondary" fontStyle="italic">
-                          No Assignments
+                          {t('assignment.noAssignment')}
                         </Typography>
                       </TableCell>
                     </TableRow>
@@ -58,7 +60,7 @@ const GradesView = ({ data }: IGradesView) => {
                             <Typography color="success.main">{grade.grade_value}</Typography>
                           ) : (
                             <Typography color="text.secondary" fontStyle="italic">
-                              Not graded
+                              {t('grade.notGraded')}
                             </Typography>
                           )}
                         </TableCell>

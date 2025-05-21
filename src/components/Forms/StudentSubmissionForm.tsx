@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField } from '@mui/material';
 
 import { StudentSubmissionValidationType, studentSubmissionValidation } from '@/utils/zod-validation';
+import { useTranslation } from 'react-i18next';
 
 interface IStudentSubmissionForm {
   onSubmit: (data: StudentSubmissionValidationType) => void;
@@ -12,6 +13,8 @@ interface IStudentSubmissionForm {
 }
 
 const StudentSubmissionForm = ({ onSubmit, assignmentId }: IStudentSubmissionForm) => {
+  const { t } = useTranslation();
+
   const defaultValues = {
     assignment_id: assignmentId ?? '',
     submission_date: new Date(),
@@ -49,7 +52,7 @@ const StudentSubmissionForm = ({ onSubmit, assignmentId }: IStudentSubmissionFor
           render={({ field }) => (
             <TextField
               {...field}
-              label={'File Url'}
+              label={t('submission.fileURL')}
               error={!!errors.file_url}
               helperText={errors.file_url?.message}
               variant="outlined"
@@ -63,7 +66,7 @@ const StudentSubmissionForm = ({ onSubmit, assignmentId }: IStudentSubmissionFor
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Student Comments'}
+              label={t('submission.comments')}
               error={!!errors.student_comments}
               helperText={errors.student_comments?.message}
               variant="outlined"
@@ -73,7 +76,7 @@ const StudentSubmissionForm = ({ onSubmit, assignmentId }: IStudentSubmissionFor
         />
 
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={!isValid}>
-          Save
+          {t('buttons.save')}
         </Button>
       </Box>
     </Box>

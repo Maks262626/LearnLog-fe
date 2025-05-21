@@ -3,9 +3,11 @@ import { Alert, Box, CircularProgress } from '@mui/material';
 import GradesView from '@/components/journal/GradesView';
 
 import { useGetStudentGradesReportQuery } from '@/redux/reportsApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const StudentGrades = () => {
   const { data, isLoading, error } = useGetStudentGradesReportQuery();
+  const {t} = useTranslation();
 
   if (isLoading) {
     return (
@@ -18,7 +20,7 @@ const StudentGrades = () => {
   if (error) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="300px">
-        <Alert severity="error">Failed to load grades.</Alert>
+        <Alert severity="error">{t('grade.noGrades')}</Alert>
       </Box>
     );
   }
@@ -26,7 +28,7 @@ const StudentGrades = () => {
   if (!data || data.data.length === 0) {
     return (
       <Box display="flex" justifyContent="center" alignItems="center" height="300px">
-        <Alert severity="info">No grades available.</Alert>
+        <Alert severity="info">{t('grades.noGrades')}</Alert>
       </Box>
     );
   }

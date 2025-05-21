@@ -18,8 +18,10 @@ import {
   useGetSubjectInstancesByGroupIdQuery,
   useUpdateSubjectInstanceMutation,
 } from '@/redux/subjectInstanceApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const WeeklyLecturesView = () => {
+  const {t} = useTranslation();
   const dateRange = getStartEndWeekDates(dayjs());
 
   const [startWeekDate, setStartWeekDate] = useState<Dayjs>(dayjs(dateRange[0]));
@@ -77,11 +79,11 @@ const WeeklyLecturesView = () => {
     <>
       <Box sx={{ px: 2, display: { xs: 'flex', sm: 'inline-flex' }, flexDirection: 'column', gap: 2 }}>
         <Button variant="contained" color="primary" onClick={handleAddSubjectInstance}>
-          <LibraryAddIcon /> ADD
+          <LibraryAddIcon /> {t('general.add')}
         </Button>
         <FormControl fullWidth>
-          <InputLabel id="group-label">Group</InputLabel>
-          <Select label="Group" value={groupId ?? ''} onChange={handleSelectGroupChange}>
+          <InputLabel id="group-label">{t('group.name')}</InputLabel>
+          <Select label={t('group.name')} value={groupId ?? ''} onChange={handleSelectGroupChange}>
             {groups?.data.map((group) => (
               <MenuItem key={group.id} value={group.id}>
                 {group.name}

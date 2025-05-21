@@ -4,9 +4,12 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Button } from '@mui/material';
 
 import Loader from '@/components/common/Loader';
+import { useTranslation } from 'react-i18next';
 
 const Auth = () => {
   const { loginWithRedirect, logout, isAuthenticated, isLoading, user } = useAuth0();
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!isAuthenticated && !isLoading) {
       loginWithRedirect();
@@ -28,9 +31,9 @@ const Auth = () => {
 
   return (
     <>
-      <h2>Welcome, {user?.name}!</h2>
+      <h2>{t('general.welcome')}, {user?.name}!</h2>
       <Button variant="contained" onClick={() => handleLogout()}>
-        LOGOUt
+        {t('auth.logout')}
       </Button>
     </>
   );

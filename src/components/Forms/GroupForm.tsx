@@ -9,6 +9,7 @@ import { Box, Button, Paper, TextField } from '@mui/material';
 import { GroupValidationType, groupValidation } from '@/utils/zod-validation';
 
 import { useGetMeQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 interface IGroupForm {
   group?: Group;
@@ -16,6 +17,7 @@ interface IGroupForm {
 }
 
 const GroupForm = ({ group, onSubmit }: IGroupForm) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: user } = useGetMeQuery(undefined, { skip: group !== undefined });
 
@@ -56,7 +58,7 @@ const GroupForm = ({ group, onSubmit }: IGroupForm) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Group Name'}
+              label={t('group.name')}
               error={!!errors.name}
               helperText={errors.name?.message}
               variant="outlined"
@@ -72,7 +74,7 @@ const GroupForm = ({ group, onSubmit }: IGroupForm) => {
           disabled={!isValid}
           sx={{ mt: 2 }}
         >
-          Save
+          {t('buttons.save')}
         </Button>
       </Paper>
     </Box>

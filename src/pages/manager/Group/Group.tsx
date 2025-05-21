@@ -10,18 +10,20 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const Group = () => {
   const { id } = useParams();
   if (!id) return;
 
   const navigate = useNavigate();
+  const {t} = useTranslation();
   const { data: users, isLoading } = useGetUsersFromGroupQuery(id);
 
   const columns: ColDef<User>[] = [
-    { field: 'first_name', headerName: 'First Name' },
-    { field: 'last_name', headerName: 'Last Name' },
-    { field: 'is_approved', headerName: 'Is Approved' },
+    { field: 'first_name', headerName: t('user.firstName') },
+    { field: 'last_name', headerName: t('user.lastName') },
+    { field: 'is_approved', headerName: t('general.isApproved') },
   ];
 
   const handleClick = (user: User) => {

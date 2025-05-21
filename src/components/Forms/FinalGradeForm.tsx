@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField } from '@mui/material';
 
 import { FinalGradeValidationType, finalGradeValidation } from '@/utils/zod-validation';
+import { useTranslation } from 'react-i18next';
 
 interface IFinalGradeForm {
   onSubmit: (data: FinalGradeValidationType) => void;
@@ -12,6 +13,7 @@ interface IFinalGradeForm {
 }
 
 const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
+  const {t} = useTranslation();
   const defaultValues = {
     subject_id: '',
     user_id: '',
@@ -48,7 +50,7 @@ const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
             <TextField
               {...field}
               type="number"
-              label={'Final Grade'}
+              label={t('finalGrade.name')}
               error={!!errors.final_grade}
               helperText={errors.final_grade?.message}
               variant="outlined"
@@ -65,7 +67,7 @@ const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
             <TextField
               {...field}
               type="number"
-              label={'Exam Grade'}
+              label={t('finalGrade.examGrade')}
               error={!!errors.exam_grade}
               helperText={errors.exam_grade?.message}
               variant="outlined"
@@ -76,7 +78,7 @@ const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
         />
 
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={!isValid}>
-          Save
+          {t('buttons.save')}
         </Button>
       </Box>
     </Box>

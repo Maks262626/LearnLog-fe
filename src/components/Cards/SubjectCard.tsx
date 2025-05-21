@@ -1,6 +1,7 @@
 import { Subject } from '@/models/Subject';
 import { Delete, Edit } from '@mui/icons-material';
 import { Box, Button, Card, CardContent, IconButton, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface SubjectCardProps {
   subject: Subject;
@@ -10,6 +11,8 @@ interface SubjectCardProps {
 }
 
 const SubjectCard = ({ subject, onEdit, onDelete, onClick }: SubjectCardProps) => {
+  const { t } = useTranslation();
+
   return (
     <>
       <Card
@@ -66,7 +69,7 @@ const SubjectCard = ({ subject, onEdit, onDelete, onClick }: SubjectCardProps) =
           }}
         >
           <Typography variant="h6">
-            Teacher: {subject.teacher.first_name} {subject.teacher.last_name}
+            {t('subject.teacher')}: {subject.teacher.first_name} {subject.teacher.last_name}
           </Typography>
         </Box>
         <Box
@@ -90,7 +93,7 @@ const SubjectCard = ({ subject, onEdit, onDelete, onClick }: SubjectCardProps) =
               color: subject.type === 'exam' ? 'error.main' : 'primary.main',
             }}
           >
-            {subject.type.toUpperCase()}
+            {t(`subject.type.${subject.type}`)}
           </Typography>
         </Box>
       </Card>

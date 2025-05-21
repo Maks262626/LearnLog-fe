@@ -1,6 +1,7 @@
 import { Assignment } from '@/models/Assignment';
 import { Delete, Edit } from '@mui/icons-material';
 import { Box, Card, CardContent, IconButton, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface IAssignmentCard {
   assignment: Assignment;
@@ -10,6 +11,8 @@ interface IAssignmentCard {
 }
 
 const AssignmentCard = ({ assignment, handleClick, onEdit, onDelete }: IAssignmentCard) => {
+  const {t} = useTranslation();
+  
   return (
     <Card
       sx={{
@@ -62,7 +65,7 @@ const AssignmentCard = ({ assignment, handleClick, onEdit, onDelete }: IAssignme
           {assignment.name}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          Due: {new Date(assignment.due_date).toLocaleDateString()}
+          {t('general.due')}: {new Date(assignment.due_date).toLocaleDateString()}
         </Typography>
       </CardContent>
     </Card>

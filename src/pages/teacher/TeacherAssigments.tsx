@@ -20,10 +20,12 @@ import {
 } from '@/redux/assignmentsApiSlice';
 import { useGetStudentSubmissionBySubjectIdQuery } from '@/redux/studentSubmissionApiSlice';
 import { useGetTeacherSubjectsQuery } from '@/redux/subjectApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const TeacherAssigments = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const state = location.state as { subjectId?: string };
 
   const [open, setOpen] = useState(false);
@@ -83,7 +85,7 @@ const TeacherAssigments = () => {
     <Box sx={{ px: 2 }}>
       <Box sx={{ display: 'inline-flex', gap: 3, flexDirection: 'column', mb: 5 }}>
         <FormControl sx={{ width: 300 }}>
-          <InputLabel id="group-label">Subjects</InputLabel>
+          <InputLabel id="group-label">{t('teacher.subject')}</InputLabel>
           <Select label="Group" value={subjectId ?? ''} onChange={handleSelectGroupChange}>
             {subjects?.data.map((subject) => (
               <MenuItem key={subject.id} value={subject.id}>
@@ -94,12 +96,12 @@ const TeacherAssigments = () => {
         </FormControl>
         {subjectId && (
           <Button variant="contained" color="primary" onClick={handleAddAssignment}>
-            Create Assignment
+            {t('assignment.create')}
           </Button>
         )}
         {subjectId && (
           <Button variant="contained" color="primary" onClick={handleFinalGrade}>
-            set final grade
+            {t('finalGrade.create')}
           </Button>
         )}
       </Box>
@@ -111,7 +113,7 @@ const TeacherAssigments = () => {
           handleEdit={handleEdit}
         />
       )}
-      {assigments && assigments.data.length === 0 && <Typography>No Assignments yet</Typography>}
+      {assigments && assigments.data.length === 0 && <Typography>{t('assignment.noAssignment')}</Typography>}
       {submissions && <StudentSubmissionList submissions={submissions.data} />}
       <AssignmentModal
         open={open}

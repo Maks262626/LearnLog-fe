@@ -6,14 +6,17 @@ import LabelIcon from '@mui/icons-material/Label';
 import SubjectIcon from '@mui/icons-material/MenuBook';
 import PlaceIcon from '@mui/icons-material/Place';
 import { Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface ISubjectInstanceCard {
   subjectInstance: SubjectInstance | null;
 }
 
 const SubjectInstanceCard = ({ subjectInstance }: ISubjectInstanceCard) => {
+  const {t} = useTranslation();
+
   if (!subjectInstance) {
-    return <Typography>No data to preview</Typography>;
+    return <Typography>{t('subjectInstance.None')}</Typography>;
   }
 
   return (
@@ -26,7 +29,6 @@ const SubjectInstanceCard = ({ subjectInstance }: ISubjectInstanceCard) => {
       }}
     >
       <CardContent sx={{ p: 0 }}>
-        {/* Header */}
         <Stack spacing={1} mb={2}>
           <Stack direction="row" alignItems="center" spacing={1}>
             <SubjectIcon sx={{ color: 'white' }} fontSize="medium" />
@@ -43,7 +45,6 @@ const SubjectInstanceCard = ({ subjectInstance }: ISubjectInstanceCard) => {
 
         <Divider sx={{ mb: 2 }} />
 
-        {/* Info Section */}
         <Stack spacing={1} mb={2}>
           <Stack direction="row" spacing={1.5} alignItems="center">
             <CalendarTodayIcon sx={{ color: 'white' }} fontSize="medium" />
@@ -72,11 +73,10 @@ const SubjectInstanceCard = ({ subjectInstance }: ISubjectInstanceCard) => {
           </Stack>
         </Stack>
 
-        {/* Status */}
         <Divider sx={{ mb: 2 }} />
         <Stack direction="row" spacing={1} alignItems="center">
           <LabelIcon sx={{ color: 'white' }} fontSize="medium" />
-          <Typography variant="body2">Status:</Typography>
+          <Typography variant="body2">{t('general.status')}:</Typography>
           <Chip
             label={subjectInstance.status}
             variant="outlined"

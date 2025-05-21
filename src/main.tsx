@@ -15,6 +15,7 @@ import Auth0Wrapper from './components/wrappers/Auth0Wrapper.tsx';
 import './index.css';
 import { setupStore } from './redux/store.ts';
 import darkTheme from './utils/theme.ts';
+import './i18n';
 
 const store = setupStore();
 ModuleRegistry.registerModules([AllCommunityModule]);

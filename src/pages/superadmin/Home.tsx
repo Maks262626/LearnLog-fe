@@ -1,11 +1,14 @@
 import { routes } from '@/routes';
 
 import TileList from '@/components/Lists/TileList';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
+  const { t } = useTranslation();
+
   const tileData = [
-    { title: 'Universities', description: 'See all uni', path: routes.PUBLIC.UNIVERSITY },
-    { title: 'Profile', description: 'View and edit your profile', path: routes.PUBLIC.PROFILE },
+    { title: t('superadmin.university'), path: routes.PUBLIC.UNIVERSITY },
+    { title: t('superadmin.profile'), path: routes.PUBLIC.PROFILE },
   ];
 
   return <TileList tileData={tileData} />;

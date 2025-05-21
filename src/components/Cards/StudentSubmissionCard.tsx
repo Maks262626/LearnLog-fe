@@ -5,6 +5,7 @@ import { routes } from '@/routes';
 import { Color } from '@/types/Color';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Card, CardContent, Chip, IconButton, Tooltip, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface IStudentSubmissionCard {
   submission: StudentSubmission;
@@ -12,6 +13,7 @@ interface IStudentSubmissionCard {
 
 const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const getStatusColor = (status: StudentSubmissionStatus): Color => {
     const map: Record<StudentSubmissionStatus, Color> = {
@@ -46,7 +48,7 @@ const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
     >
       <CardContent>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h6">Submission Details</Typography>
+          <Typography variant="h6">{t('submission.details')}</Typography>
           {submission.status && (
             <Chip
               label={submission.status.replace('_', ' ').toUpperCase()}
@@ -61,7 +63,7 @@ const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
             {submission.assignment.name}
           </Typography>
           <Typography variant="subtitle2" color="text.secondary">
-            Submitted on:
+            {t('submission.submittedOn')}:
           </Typography>
           <Typography variant="body2">{new Date(submission.submission_date).toLocaleString()}</Typography>
         </Box>
@@ -69,7 +71,7 @@ const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
         {submission.student_comments && (
           <Box mb={1}>
             <Typography variant="subtitle2" color="text.secondary">
-              Comments:
+              {t('submission.comments')}:
             </Typography>
             <Typography variant="body2">{submission.student_comments}</Typography>
           </Box>
@@ -77,7 +79,7 @@ const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
 
         <Box mb={1}>
           <Typography variant="subtitle2" color="text.secondary">
-            File URL:
+          {t('submission.fileURL')}:
           </Typography>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography

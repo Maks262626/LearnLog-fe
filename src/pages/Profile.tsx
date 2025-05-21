@@ -1,8 +1,15 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { Avatar, Box, Button, Card, CardContent, Typography } from '@mui/material';
+import { Avatar, Box, Button, Card, CardContent, Stack, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
   const { loginWithRedirect, logout, user } = useAuth0();
+  const { t, i18n } = useTranslation();
+  const currentLang = i18n.language;
+
+  const changeLanguage = (lng: 'en' | 'ua') => {
+    i18n.changeLanguage(lng);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -17,7 +24,7 @@ const Profile = () => {
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" gap={3}>
       {!user ? (
         <Button variant="contained" onClick={() => loginWithRedirect()}>
-          Login with Auth0
+          {t('auth.login')}
         </Button>
       ) : (
         <Card sx={{ maxWidth: 400, p: 3, textAlign: 'center' }}>
@@ -27,17 +34,31 @@ const Profile = () => {
               {user.name}
             </Typography>
             <Typography variant="body1" color="textSecondary">
-              <strong>Email:</strong> {user.email}
+              <strong>{t('profile.email')}:</strong> {user.email}
             </Typography>
             <Typography variant="body1" color="textSecondary">
-              <strong>Role:</strong> {user['https://learnlog.com/roles']?.join(', ') || 'No Role'}
+              <strong>{t('profile.role')}:</strong> {user['https://learnlog.com/roles']?.join(', ') || t('profile.noRole')}
             </Typography>
           </CardContent>
           <Button variant="contained" color="secondary" onClick={() => handleLogout()}>
-            Logout
+            {t('auth.logout')}
           </Button>
         </Card>
       )}
+      <Stack direction="row" spacing={1}>
+        <Button
+          variant={currentLang === 'en' ? 'contained' : 'outlined'}
+          onClick={() => changeLanguage('en')}
+        >
+          EN
+        </Button>
+        <Button
+          variant={currentLang === 'ua' ? 'contained' : 'outlined'}
+          onClick={() => changeLanguage('ua')}
+        >
+          UA
+        </Button>
+      </Stack>
     </Box>
   );
 };

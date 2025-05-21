@@ -3,12 +3,14 @@ import { SubjectInstance } from '@/models/SubjectInstance';
 import { Box, Button, List, ListItem, ListItemText, Paper, Stack, Typography } from '@mui/material';
 
 import { useGetAttendanceBySubjectInstanceIdQuery, useUpdateAttendanceMutation } from '@/redux/attendanceApiSlice';
+import { useTranslation } from 'react-i18next';
 
 interface IAttendanceManage {
   subjectInstance: SubjectInstance | null;
 }
 
 const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
+  const {t} = useTranslation();
   const { data, isLoading } = useGetAttendanceBySubjectInstanceIdQuery(subjectInstance?.id!, {
     skip: !subjectInstance,
   });
@@ -21,7 +23,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
   if (!subjectInstance) {
     return (
       <Typography variant="h6" textAlign="center" mt={4}>
-        🛠️ Coming soon...
+        {t('general.comingSoon')}
       </Typography>
     );
   }
@@ -29,7 +31,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
   if (data?.data.length === 0 && !isLoading) {
     return (
       <Typography variant="h6" textAlign="center" mt={4}>
-        🛠️ There are no student in group
+        {t('group.noStudent')}
       </Typography>
     );
   }
@@ -37,7 +39,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
   return (
     <Box mt={3}>
       <Typography variant="h5" gutterBottom>
-        Manage Attendance
+        {t('attendance.manage')}
       </Typography>
       <Paper elevation={2}>
         <List>
@@ -51,7 +53,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
                   size="small"
                   onClick={() => handleStatus(attendance.id, AttendanceStatus.PRESENT)}
                 >
-                  Present
+                  {t('attendance.status.present')}
                 </Button>
                 <Button
                   variant={attendance.status === AttendanceStatus.ABSENT ? 'contained' : 'outlined'}
@@ -59,7 +61,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
                   size="small"
                   onClick={() => handleStatus(attendance.id, AttendanceStatus.ABSENT)}
                 >
-                  Absent
+                  {t('attendance.status.absent')}
                 </Button>
                 <Button
                   variant={attendance.status === AttendanceStatus.LATE ? 'contained' : 'outlined'}
@@ -67,7 +69,7 @@ const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
                   size="small"
                   onClick={() => handleStatus(attendance.id, AttendanceStatus.LATE)}
                 >
-                  Late
+                  {t('attendance.status.late')}
                 </Button>
               </Stack>
             </ListItem>

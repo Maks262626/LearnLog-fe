@@ -19,6 +19,7 @@ import {
   useGetStudentSubmissionByIdQuery,
   useUpdateStudentSubmissionMutation,
 } from '@/redux/studentSubmissionApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const getStatusColor = (status: StudentSubmissionStatus): Color => {
   const map: Record<StudentSubmissionStatus, Color> = {
@@ -34,6 +35,7 @@ const getStatusColor = (status: StudentSubmissionStatus): Color => {
 const Submission = () => {
   const { id } = useParams();
   if (!id) return;
+  const { t } = useTranslation();
   const { role } = useUserRole();
   const { data: submission, isLoading } = useGetStudentSubmissionByIdQuery(id);
   const { data: studentGrade } = useGetGradeByUserIdAndAssignmentIdQuery(
@@ -48,7 +50,6 @@ const Submission = () => {
   const [updateStudentSubmission] = useUpdateStudentSubmissionMutation();
   const [updateGrade] = useUpdateGradeMutation();
   const [open, setOpen] = useState(false);
-
   useEffect(() => {
     if (submission && submission.data.status === StudentSubmissionStatus.PENDING) {
       updateStudentSubmission({
@@ -87,7 +88,7 @@ const Submission = () => {
   return (
     <Box maxWidth="700px" margin="0 auto" padding={4}>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Typography variant="h4">Submission Info</Typography>
+        <Typography variant="h4">{t('submission.info')}</Typography>
         <Chip
           label={submission.data.status.replace('_', ' ').toUpperCase()}
           color={getStatusColor(submission.data.status)}
@@ -97,14 +98,14 @@ const Submission = () => {
 
       <Box mb={3}>
         <Typography variant="subtitle2" color="text.secondary">
-          Assignment:
+          {t('assignment.name')}:
         </Typography>
         <Typography variant="h5">{submission.data.assignment.name}</Typography>
         <Typography variant="body2" color="text.secondary">
           {submission.data.assignment.description}
         </Typography>
         <Typography variant="caption" color="text.secondary">
-          Due Date: {new Date(submission.data.assignment.due_date).toLocaleString()}
+          {t('assignment.dueDate')}: {new Date(submission.data.assignment.due_date).toLocaleString()}
         </Typography>
       </Box>
 
@@ -112,7 +113,7 @@ const Submission = () => {
 
       <Box mb={3}>
         <Typography variant="subtitle2" color="text.secondary">
-          Submitted by:
+          {t('submission.submittedBy')}:
         </Typography>
         <Typography variant="body1">
           {submission.data.user.first_name} {submission.data.user.last_name}
@@ -125,7 +126,7 @@ const Submission = () => {
       {submission.data.student_comments && (
         <Box mb={3}>
           <Typography variant="subtitle2" color="text.secondary">
-            Comments:
+            {t('submission.comments')}:
           </Typography>
           <Typography variant="body1">{submission.data.student_comments}</Typography>
         </Box>
@@ -133,7 +134,7 @@ const Submission = () => {
 
       <Box mb={3}>
         <Typography variant="subtitle2" color="text.secondary">
-          File URL:
+          {t('submission.fileURL')}:
         </Typography>
         <Box display="flex" alignItems="center" gap={1}>
           <Typography variant="body2" sx={{ wordBreak: 'break-word', flexGrow: 1 }}>
@@ -150,10 +151,11 @@ const Submission = () => {
       {role === UserRoleName.TEACHER && (
         <Box display="flex" gap={2} mt={4}>
           <Button variant="contained" color="success" onClick={handleApprove}>
-            Approve
+            {t('buttons.approve')}
           </Button>
           <Button variant="outlined" color="error" onClick={handleRequestResubmission}>
-            Request Resubmission
+            {t('buttons.requestResubmission')}
+
           </Button>
         </Box>
       )}

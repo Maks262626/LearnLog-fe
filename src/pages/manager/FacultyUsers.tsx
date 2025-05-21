@@ -10,6 +10,7 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetMeQuery, useGetUsersFromFacultyQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const FacultyUsers = () => {
   const navigate = useNavigate();
@@ -17,12 +18,13 @@ const FacultyUsers = () => {
   const facultyId = user?.data.faculty_id;
   if (!facultyId) return;
 
+  const {t} = useTranslation();
   const { data, isLoading } = useGetUsersFromFacultyQuery(facultyId);
 
   const columns: ColDef<User>[] = [
-    { field: 'first_name', headerName: 'Firt Name' },
-    { field: 'last_name', headerName: 'Last Name' },
-    { field: 'is_approved', headerName: 'Is Approved' },
+    { field: 'first_name', headerName: t('user.firstName') },
+    { field: 'last_name', headerName: t('user.lastName') },
+    { field: 'is_approved', headerName: t('general.isApproved') },
   ];
 
   const handleClick = (user: User) => {

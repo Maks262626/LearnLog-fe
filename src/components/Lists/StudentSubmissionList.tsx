@@ -2,16 +2,19 @@ import { StudentSubmission } from '@/models/StudentSubmission';
 import { Grid, Typography } from '@mui/material';
 
 import StudentSubmissionCard from '../Cards/StudentSubmissionCard';
+import { useTranslation } from 'react-i18next';
 
 interface IStudentSubmissionList {
   submissions: StudentSubmission[];
 }
 
 const StudentSubmissionList = ({ submissions }: IStudentSubmissionList) => {
+  const { t } = useTranslation();
+
   if (submissions.length === 0) {
     return (
       <Typography variant="body1" color="text.secondary" align="center">
-        No submissions available
+        {t('submission.noSubmission')}
       </Typography>
     );
   }

@@ -15,8 +15,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] }) => {
+  const { t } = useTranslation();
+
   return (
     <Box sx={{ p: 2 }}>
       {data.map(({ subject, studentGrades }) => (
@@ -25,10 +28,10 @@ const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] 
             <Box>
               <Typography variant="h6">{subject.name}</Typography>
               <Typography variant="body2" color="text.secondary">
-                {subject.description} — Type: {subject.type.toUpperCase()}
+                {subject.description} — {t('general.type')}: {subject.type.toUpperCase()}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Group: {subject.group.name}, Teacher: {subject.teacher.first_name} {subject.teacher.last_name}
+                {t('group.name')}: {subject.group.name}, {t('subject.teacher')}: {subject.teacher.first_name} {subject.teacher.last_name}
               </Typography>
             </Box>
           </AccordionSummary>
@@ -37,9 +40,9 @@ const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] 
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Student</TableCell>
-                    <TableCell>Assignments</TableCell>
-                    <TableCell>Final Grade</TableCell>
+                    <TableCell>{t('user.roles.student')}</TableCell>
+                    <TableCell>{t('assignment.name')}</TableCell>
+                    <TableCell>{t('finalGrade.name')}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -59,7 +62,7 @@ const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] 
                                 {assignment.description}
                               </Typography>
                               <Typography variant="body2" component={'span'}>
-                                Grade:{' '}
+                                {t('grade.name')}:{' '}
                                 {grade.grade_value !== null ? (
                                   <Chip label={grade.grade_value} color="primary" size="small" />
                                 ) : (

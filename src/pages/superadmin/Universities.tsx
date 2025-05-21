@@ -10,14 +10,16 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUniversitiesQuery } from '@/redux/universityApiSlice';
+import { useTranslation } from 'react-i18next';
 
 const Universities = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data, isLoading } = useGetUniversitiesQuery();
 
   const columns: ColDef<University>[] = [
-    { field: 'name', headerName: 'Name' },
-    { field: 'created_at', headerName: 'Created At' },
+    { field: 'name', headerName: t('general.name') },
+    { field: 'created_at', headerName: t('general.createdAt') },
   ];
 
   const handleClick = (uni: University) => {

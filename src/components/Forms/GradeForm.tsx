@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField } from '@mui/material';
 
 import { GradeValidationType, gradeValidation } from '@/utils/zod-validation';
+import { useTranslation } from 'react-i18next';
 
 interface IGradeForm {
   onSubmit: (data: GradeValidationType) => void;
@@ -12,6 +13,8 @@ interface IGradeForm {
 }
 
 const GradeForm = ({ onSubmit, grade }: IGradeForm) => {
+  const {t} = useTranslation();
+
   const defaultValues = {
     user_id: '',
     assignment_id: '',
@@ -48,7 +51,7 @@ const GradeForm = ({ onSubmit, grade }: IGradeForm) => {
             <TextField
               {...field}
               type="number"
-              label={'Grade'}
+              label={t('grade.name')}
               error={!!errors.grade_value}
               helperText={errors.grade_value?.message}
               variant="outlined"
@@ -59,7 +62,7 @@ const GradeForm = ({ onSubmit, grade }: IGradeForm) => {
         />
 
         <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }} disabled={!isValid}>
-          Save
+          {t('buttons.save')}
         </Button>
       </Box>
     </Box>

@@ -25,6 +25,7 @@ import { SubjectValidationType, subjectValidation } from '@/utils/zod-validation
 import { useGetFacultiesInMyUniversityQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
 import { useGetTeachersByFacultyIdQuery } from '@/redux/usersApiSlice';
+import { useTranslation } from 'react-i18next';
 
 interface ISubjectForm {
   subject?: Subject;
@@ -32,6 +33,7 @@ interface ISubjectForm {
 }
 
 const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
+  const {t} = useTranslation();
   const navigate = useNavigate();
   const { data: groups, isLoading: isGroupLoading } = useGetGroupsInMyFacultyQuery();
   const { data: faculties } = useGetFacultiesInMyUniversityQuery();
@@ -87,7 +89,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Subject Name'}
+              label={t('subject.name')}
               error={!!errors.name}
               helperText={errors.name?.message}
               variant="outlined"
@@ -101,7 +103,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={'Subject Name'}
+              label={t('general.description')}
               error={!!errors.description}
               helperText={errors.description?.message}
               variant="outlined"
@@ -129,7 +131,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
                   border: `2px solid ${field.value === SubjectType.CREDIT ? 'red' : 'gray'}`,
                 }}
               >
-                Credit
+                {t('subject.type.credit')}
               </ToggleButton>
               <ToggleButton
                 value={SubjectType.EXAM}
@@ -140,7 +142,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
                   border: `2px solid ${field.value === SubjectType.EXAM ? 'yellow' : 'gray'} !important`,
                 }}
               >
-                Exam
+                {t('subject.type.exam')}
               </ToggleButton>
             </ToggleButtonGroup>
           )}
@@ -151,8 +153,8 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel id="faculty-label">Group</InputLabel>
-              <Select {...field} value={field.value || ''} error={!!errors.group_id} label="Group">
+              <InputLabel id="faculty-label">{t('group.name')}</InputLabel>
+              <Select {...field} value={field.value || ''} error={!!errors.group_id} label={t('group.name')}>
                 {groups?.data.map((group) => (
                   <MenuItem key={group.id} value={group.id}>
                     {group.name}
@@ -164,10 +166,10 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
         />
 
         <FormControl fullWidth>
-          <InputLabel id="faculty-label">Teacher Faculty</InputLabel>
+          <InputLabel id="faculty-label">{t('subject.teacherFaculty')}</InputLabel>
           <Select
             value={selectedFaculty || ''}
-            label="Teacher Faculty"
+            label={t('subject.teacherFaculty')}
             onChange={(event) => {
               const value = event.target.value;
               setSelectedFaculty(value ?? undefined);
@@ -187,8 +189,8 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
           control={control}
           render={({ field }) => (
             <FormControl fullWidth>
-              <InputLabel id="teacher-label">Teacher</InputLabel>
-              <Select {...field} value={field.value || ''} error={!!errors.teacher_id} label="Teacher">
+              <InputLabel id="teacher-label">{t('subject.teacher')}</InputLabel>
+              <Select {...field} value={field.value || ''} error={!!errors.teacher_id} label={t('subject.teacher')}>
                 {teachers?.data.map((teachers) => (
                   <MenuItem key={teachers.id} value={teachers.id}>
                     {teachers.first_name} {teachers.last_name}
@@ -207,7 +209,7 @@ const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
           disabled={!isValid}
           onClick={() => navigate(routes.PUBLIC.SUBJECT)}
         >
-          Save
+          {t('buttons.save')}
         </Button>
       </Paper>
     </Box>

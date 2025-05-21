@@ -10,6 +10,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface IDangerZone {
   handleDelete: () => void;
@@ -21,39 +22,40 @@ interface IDangerZone {
 }
 const DangerZone = ({
   handleDelete,
-  title = 'Danger Zone',
-  description = 'Deleting this item is irreversible. This action cannot be undone.',
-  confirmTitle = 'Confirm Deletion',
-  confirmText = 'Are you sure you want to delete this item? This action cannot be undone.',
-  deleteButtonLabel = 'Delete',
+  title,
+  description,
+  confirmTitle,
+  confirmText,
+  deleteButtonLabel,
 }: IDangerZone) => {
+  const { t } = useTranslation();
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   return (
     <>
       <Paper sx={{ p: 3, border: '1px solid red', backgroundColor: '#ffebee', width: '70%' }}>
         <Typography variant="h6" gutterBottom color="error">
-          {title}
+          {title ?? t('dangerZone.title')}
         </Typography>
         <Typography variant="body2" color="error" gutterBottom>
-          {description}
+          {description ?? t('dangerZone.description')}
         </Typography>
         <Button variant="contained" color="error" sx={{ mt: 2 }} onClick={() => setOpenDeleteDialog(true)}>
-          {deleteButtonLabel}
+          {deleteButtonLabel ?? t('dangerZone.deleteButtonLabel')}
         </Button>
       </Paper>
 
       <Dialog open={openDeleteDialog} onClose={() => setOpenDeleteDialog(false)}>
-        <DialogTitle>{confirmTitle}</DialogTitle>
+        <DialogTitle>{confirmTitle ?? t('dangerZone.confirmTitle')}</DialogTitle>
         <DialogContent>
-          <DialogContentText>{confirmText}</DialogContentText>
+          <DialogContentText>{confirmText ?? t('dangerZone.confirmText')}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setOpenDeleteDialog(false)} color="primary">
-            Cancel
+            {t('buttons.cancel')}
           </Button>
           <Button onClick={handleDelete} color="error" variant="contained">
-            {deleteButtonLabel}
+            {deleteButtonLabel ?? t('dangerZone.deleteButtonLabel')}
           </Button>
         </DialogActions>
       </Dialog>

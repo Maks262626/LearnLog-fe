@@ -6,9 +6,11 @@ import { Box, Button } from '@mui/material';
 import TileList from '@/components/Lists/TileList';
 
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
+import { useTranslation } from 'react-i18next';
 
 const Groups = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { data: groups } = useGetGroupsInMyFacultyQuery();
   const tileData = groups?.data.map((group) => ({
     title: group.name,
@@ -24,7 +26,7 @@ const Groups = () => {
         onClick={() => navigate(routes.PUBLIC.CREATE_GROUP)}
         sx={{ alignSelf: 'center' }}
       >
-        Create Group
+        {t('group.create')}
       </Button>
       {tileData && <TileList tileData={tileData} />}
     </Box>

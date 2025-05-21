@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 interface IAttendancesView {
   data: StudentAttendancesReport[];
@@ -73,10 +74,12 @@ const getPieData = (attendances: AttendanceEntry[]): PieDataItem[] => {
 };
 
 const AttendancesView = ({ data }: IAttendancesView) => {
+  const { t } = useTranslation();
+
   return (
     <Box p={3}>
       <Typography variant="h4" gutterBottom>
-        Your Attendances
+        {t('attendance.your')}
       </Typography>
 
       {data.map(({ subject, attendances }) => {
@@ -95,13 +98,13 @@ const AttendancesView = ({ data }: IAttendancesView) => {
 
             <AccordionDetails>
               {attendances.length === 0 ? (
-                <Typography>No attendance data for this subject.</Typography>
+                <Typography>{t('attendance.noAttendance')}</Typography>
               ) : (
                 <>
                   <Box mb={2}>
                     <Typography variant="body2" gutterBottom>
-                      Total: {stats.total} | Present: {stats.present} | Late: {stats.late} | Absent: {stats.absent} —
-                      Attendance: {stats.percentage}%
+                      {t('general.total')}: {stats.total} | {t('attendance.status.present')}: {stats.present} | {t('attendance.status.late')}: {stats.late} | {t('attendance.status.absent')}: {stats.absent} —
+                      {t('attendance.name')}: {stats.percentage}%
                     </Typography>
                     <PieChart series={[{ data: getPieData(attendances) }]} width={300} height={200} />
                   </Box>
@@ -110,10 +113,10 @@ const AttendancesView = ({ data }: IAttendancesView) => {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>Date</TableCell>
-                          <TableCell>Time</TableCell>
-                          <TableCell>Lesson</TableCell>
-                          <TableCell>Status</TableCell>
+                          <TableCell>{t('general.date')}</TableCell>
+                          <TableCell>{t('general.time')}</TableCell>
+                          <TableCell>{t('general.lesson')}</TableCell>
+                          <TableCell>{t('general.status')}</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

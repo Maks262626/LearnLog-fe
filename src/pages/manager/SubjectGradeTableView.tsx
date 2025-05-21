@@ -11,8 +11,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryReport[] }) => {
+  const {t} = useTranslation();
+
   return (
     <Box p={2}>
       {data.map((subjectReport) => (
@@ -21,7 +24,7 @@ const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryRepo
             {subjectReport.subject.name}
           </Typography>
           <Typography variant="subtitle1" gutterBottom color="textSecondary">
-            Teacher: {subjectReport.subject.teacher.first_name} {subjectReport.subject.teacher.last_name} | Group:{' '}
+            {t('subject.teacher')}: {subjectReport.subject.teacher.first_name} {subjectReport.subject.teacher.last_name} | {t('group.name')}:{' '}
             {subjectReport.subject.group.name}
           </Typography>
 
@@ -30,7 +33,7 @@ const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryRepo
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <strong>Student</strong>
+                    <strong>{t('user.roles.student')}</strong>
                   </TableCell>
                   {subjectReport.studentGrades[0]?.grades.map((g, i) => (
                     <TableCell key={i}>
@@ -38,7 +41,7 @@ const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryRepo
                     </TableCell>
                   ))}
                   <TableCell>
-                    <strong>Final Grade</strong>
+                    <strong>{t('finalGrade.name')}</strong>
                   </TableCell>
                 </TableRow>
               </TableHead>

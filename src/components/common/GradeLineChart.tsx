@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { useTranslation } from 'react-i18next';
 
 interface GradeEntry {
   name: string;
@@ -11,6 +12,8 @@ interface Props {
 }
 
 const GradeLineChart = ({ grades }: Props) => {
+  const {t} = useTranslation();
+
   if (grades.length === 0) return null;
 
   const xLabels = grades.map((g) => g.name);
@@ -19,7 +22,7 @@ const GradeLineChart = ({ grades }: Props) => {
   return (
     <Box mt={3}>
       <Typography variant="subtitle2" gutterBottom>
-        Grade Progression
+        {t('grade.lineChart')}
       </Typography>
       <LineChart
         xAxis={[{ scaleType: 'point', data: xLabels }]}
