@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { defaultColDef, myTableTheme } from '@/constants';
 import { User } from '@/models/User';
 import { Box } from '@mui/material';
@@ -7,7 +9,6 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUsersInMyGroupQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const StudentGroup = () => {
   const { data: users, isLoading } = useGetUsersInMyGroupQuery();

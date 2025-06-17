@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { AttendanceStatus } from '@/models/Attendance';
 import { SubjectInstance } from '@/models/SubjectInstance';
@@ -7,7 +8,6 @@ import { Box, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 import TeacherScheduleModal from '../Modals/TeacherScheduleModal';
-import { useTranslation } from 'react-i18next';
 
 const CELL_SIZE = 60;
 
@@ -17,7 +17,7 @@ interface IJournalView {
 }
 
 const JournalView = ({ subjectInstances, users }: IJournalView) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [subjectInstance, setSubjectInstance] = useState<SubjectInstance | null>(null);
   const instanceCount = subjectInstances.length ?? 0;

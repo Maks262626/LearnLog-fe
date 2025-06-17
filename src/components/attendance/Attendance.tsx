@@ -1,16 +1,17 @@
+import { useTranslation } from 'react-i18next';
+
 import { AttendanceStatus } from '@/models/Attendance';
 import { SubjectInstance } from '@/models/SubjectInstance';
 import { Box, Button, List, ListItem, ListItemText, Paper, Stack, Typography } from '@mui/material';
 
 import { useGetAttendanceBySubjectInstanceIdQuery, useUpdateAttendanceMutation } from '@/redux/attendanceApiSlice';
-import { useTranslation } from 'react-i18next';
 
 interface IAttendanceManage {
   subjectInstance: SubjectInstance | null;
 }
 
 const AttendanceManage = ({ subjectInstance }: IAttendanceManage) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { data, isLoading } = useGetAttendanceBySubjectInstanceIdQuery(subjectInstance?.id!, {
     skip: !subjectInstance,
   });

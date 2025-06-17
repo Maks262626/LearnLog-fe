@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { defaultColDef, myTableTheme } from '@/constants';
@@ -10,14 +11,13 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const Group = () => {
   const { id } = useParams();
   if (!id) return;
 
   const navigate = useNavigate();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { data: users, isLoading } = useGetUsersFromGroupQuery(id);
 
   const columns: ColDef<User>[] = [

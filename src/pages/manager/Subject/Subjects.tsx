@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -7,7 +8,6 @@ import SubjectList from '@/components/Lists/SubjectList';
 import Loader from '@/components/common/Loader';
 
 import { useGetSubjectsInMyFacultyQuery } from '@/redux/subjectApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const Subjects = () => {
   const navigate = useNavigate();

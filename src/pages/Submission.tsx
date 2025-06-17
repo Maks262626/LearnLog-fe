@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { StudentSubmissionStatus } from '@/models/StudentSubmission';
@@ -19,7 +20,6 @@ import {
   useGetStudentSubmissionByIdQuery,
   useUpdateStudentSubmissionMutation,
 } from '@/redux/studentSubmissionApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const getStatusColor = (status: StudentSubmissionStatus): Color => {
   const map: Record<StudentSubmissionStatus, Color> = {
@@ -155,7 +155,6 @@ const Submission = () => {
           </Button>
           <Button variant="outlined" color="error" onClick={handleRequestResubmission}>
             {t('buttons.requestResubmission')}
-
           </Button>
         </Box>
       )}

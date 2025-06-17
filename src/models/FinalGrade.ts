@@ -6,5 +6,5 @@ export interface FinalGrade {
   user_id: string;
   user: Pick<User, 'id' | 'first_name' | 'last_name'>;
   final_grade: number;
-  exam_grade?: number;
+  exam_grade?: number | null;
 }

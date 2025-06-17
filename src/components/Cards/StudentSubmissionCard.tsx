@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { StudentSubmission, StudentSubmissionStatus } from '@/models/StudentSubmission';
@@ -5,7 +6,6 @@ import { routes } from '@/routes';
 import { Color } from '@/types/Color';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Box, Card, CardContent, Chip, IconButton, Tooltip, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface IStudentSubmissionCard {
   submission: StudentSubmission;
@@ -79,7 +79,7 @@ const StudentSubmissionCard = ({ submission }: IStudentSubmissionCard) => {
 
         <Box mb={1}>
           <Typography variant="subtitle2" color="text.secondary">
-          {t('submission.fileURL')}:
+            {t('submission.fileURL')}:
           </Typography>
           <Box display="flex" alignItems="center" gap={1}>
             <Typography

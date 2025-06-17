@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Button,
@@ -10,7 +11,6 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface IDangerZone {
   handleDelete: () => void;

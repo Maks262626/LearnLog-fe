@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { SubjectInstance, SubjectInstanceStatus, SubjectInstanceType } from '@/models/SubjectInstance';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,7 +14,6 @@ import { SubjectInstanceValidationType, subjectInstanceValidation } from '@/util
 
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
 import { useGetSubjectsByGroupIdQuery } from '@/redux/subjectApiSlice';
-import { useTranslation } from 'react-i18next';
 
 interface ISubjectInstanceForm {
   onSubmit: (data: SubjectInstanceValidationType) => void;
@@ -62,7 +62,12 @@ const SubjectInstanceForm = ({ subjectInstance, onSubmit, handleDelete }: ISubje
     <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'grid', placeItems: 'center', gap: 3 }}>
       <FormControl fullWidth>
         <InputLabel id="group-label">{t('group.name')}</InputLabel>
-        <Select label={t('group.name')} value={groupId} onChange={handleSelectChange} disabled={Boolean(subjectInstance)}>
+        <Select
+          label={t('group.name')}
+          value={groupId}
+          onChange={handleSelectChange}
+          disabled={Boolean(subjectInstance)}
+        >
           {groups?.data.map((group) => (
             <MenuItem key={group.id} value={group.id}>
               {group.name}

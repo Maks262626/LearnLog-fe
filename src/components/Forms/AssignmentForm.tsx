@@ -1,4 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Assignment } from '@/models/Assignment';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +10,6 @@ import dayjs, { Dayjs } from 'dayjs';
 import rehypeSanitize from 'rehype-sanitize';
 
 import { AssigmentValidationType, assigmentValidation } from '@/utils/zod-validation';
-import { useTranslation } from 'react-i18next';
 
 interface IAssignmentForm {
   onSubmit: (data: AssigmentValidationType) => void;
@@ -18,7 +18,7 @@ interface IAssignmentForm {
 }
 
 const AssignmentForm = ({ onSubmit, subjectId, assignment }: IAssignmentForm) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const defaultValues = {
     subject_id: subjectId ?? '',
     name: '',

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -28,7 +29,6 @@ import { useGetFacultiesByUniversityIdQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupsByFacultyIdQuery } from '@/redux/groupSlice';
 import { useGetUniversitiesQuery } from '@/redux/universityApiSlice';
 import { useRegisterUserMutation } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -132,7 +132,7 @@ const RegisterForm = () => {
           }}
         >
           <FormControlLabel value="manager" control={<Radio />} label={t('user.roles.manager')} />
-          <FormControlLabel value="teacher" control={<Radio />} label={t('user.roles.teacher')}/>
+          <FormControlLabel value="teacher" control={<Radio />} label={t('user.roles.teacher')} />
           <FormControlLabel value="student" control={<Radio />} label={t('user.roles.student')} />
         </RadioGroup>
       </FormControl>

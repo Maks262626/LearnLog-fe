@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -10,12 +11,11 @@ import StudentSubmissionList from '@/components/Lists/StudentSubmissionList';
 import { useGetAssignmentsBySubjectIdQuery } from '@/redux/assignmentsApiSlice';
 import { useGetStudentSubmissionBySubjectIdQuery } from '@/redux/studentSubmissionApiSlice';
 import { useGetSubjectsInMyGroupQuery } from '@/redux/subjectApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const StudentAssignments = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const state = location.state as { subjectId?: string };
   const [subjectId, setSubjectId] = useState<string | null>(state.subjectId ?? null);
   const { data: subjects } = useGetSubjectsInMyGroupQuery();

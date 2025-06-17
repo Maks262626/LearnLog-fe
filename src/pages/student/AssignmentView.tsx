@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { Box, Button } from '@mui/material';
@@ -10,7 +11,6 @@ import { StudentSubmissionValidationType } from '@/utils/zod-validation';
 
 import { useGetAssignmentByIdQuery } from '@/redux/assignmentsApiSlice';
 import { useCreateStudentSubmissionMutation } from '@/redux/studentSubmissionApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const AssignmentView = () => {
   const { id } = useParams();

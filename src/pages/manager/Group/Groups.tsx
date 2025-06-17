@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -6,7 +7,6 @@ import { Box, Button } from '@mui/material';
 import TileList from '@/components/Lists/TileList';
 
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
-import { useTranslation } from 'react-i18next';
 
 const Groups = () => {
   const navigate = useNavigate();

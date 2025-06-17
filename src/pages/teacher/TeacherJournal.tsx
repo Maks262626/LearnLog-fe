@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Typography } from '@mui/material';
 
@@ -9,7 +10,6 @@ import { useGetAssignmentsBySubjectIdQuery } from '@/redux/assignmentsApiSlice';
 import { useGetTeacherSubjectsQuery } from '@/redux/subjectApiSlice';
 import { useGetSubjectInstancesBySubjectIdQuery } from '@/redux/subjectInstanceApiSlice';
 import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const TeacherJournal = () => {
   const { t } = useTranslation();

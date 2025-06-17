@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Attendance, AttendanceStatus } from '@/models/Attendance';
 import { SubjectInstance } from '@/models/SubjectInstance';
 import { Color } from '@/types/Color';
@@ -20,7 +22,6 @@ import {
 } from '@mui/material';
 import { PieChart } from '@mui/x-charts/PieChart';
 import dayjs from 'dayjs';
-import { useTranslation } from 'react-i18next';
 
 interface IAttendancesView {
   data: StudentAttendancesReport[];
@@ -103,7 +104,8 @@ const AttendancesView = ({ data }: IAttendancesView) => {
                 <>
                   <Box mb={2}>
                     <Typography variant="body2" gutterBottom>
-                      {t('general.total')}: {stats.total} | {t('attendance.status.present')}: {stats.present} | {t('attendance.status.late')}: {stats.late} | {t('attendance.status.absent')}: {stats.absent} —
+                      {t('general.total')}: {stats.total} | {t('attendance.status.present')}: {stats.present} |{' '}
+                      {t('attendance.status.late')}: {stats.late} | {t('attendance.status.absent')}: {stats.absent} —
                       {t('attendance.name')}: {stats.percentage}%
                     </Typography>
                     <PieChart series={[{ data: getPieData(attendances) }]} width={300} height={200} />

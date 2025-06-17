@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { defaultColDef, myTableTheme } from '@/constants';
@@ -10,7 +11,6 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetUniversitiesQuery } from '@/redux/universityApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const Universities = () => {
   const { t } = useTranslation();

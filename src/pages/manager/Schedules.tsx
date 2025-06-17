@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { SubjectInstance } from '@/models/SubjectInstance';
 import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
@@ -18,10 +19,9 @@ import {
   useGetSubjectInstancesByGroupIdQuery,
   useUpdateSubjectInstanceMutation,
 } from '@/redux/subjectInstanceApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const WeeklyLecturesView = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const dateRange = getStartEndWeekDates(dayjs());
 
   const [startWeekDate, setStartWeekDate] = useState<Dayjs>(dayjs(dateRange[0]));

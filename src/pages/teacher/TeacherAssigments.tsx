@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Assignment } from '@/models/Assignment';
@@ -20,7 +21,6 @@ import {
 } from '@/redux/assignmentsApiSlice';
 import { useGetStudentSubmissionBySubjectIdQuery } from '@/redux/studentSubmissionApiSlice';
 import { useGetTeacherSubjectsQuery } from '@/redux/subjectApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const TeacherAssigments = () => {
   const navigate = useNavigate();

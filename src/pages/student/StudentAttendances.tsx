@@ -1,13 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import { Box, CircularProgress, Typography } from '@mui/material';
 
 import AttendancesView from '@/components/attendance/AttendancesView';
 
 import { useGetStudentAttendancesReportQuery } from '@/redux/reportsApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const StudentAttendances = () => {
   const { data, isLoading } = useGetStudentAttendancesReportQuery();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   if (isLoading) {
     return (

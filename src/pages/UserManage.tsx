@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { UserRoleName } from '@/models/User';
@@ -27,7 +28,6 @@ import { useGetFacultyByIdQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupByIdQuery } from '@/redux/groupSlice';
 import { useGetUniversityByIdQuery } from '@/redux/universityApiSlice';
 import { useDeleteUserMutation, useGetUserByIdQuery, useUpdateUserRoleMutation } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const UserManage = () => {
   const { id } = useParams();
@@ -153,9 +153,7 @@ const UserManage = () => {
       <Dialog open={openDeleteDialog} onClose={handleCloseDeleteDialog}>
         <DialogTitle>{t('user.dialog.confirmDeletionTitle')}</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {t('user.dialog.confirmDeletionText')}
-          </DialogContentText>
+          <DialogContentText>{t('user.dialog.confirmDeletionText')}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDeleteDialog} color="primary">

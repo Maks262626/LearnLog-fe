@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import { StudentSubmission } from '@/models/StudentSubmission';
 import { Grid, Typography } from '@mui/material';
 
 import StudentSubmissionCard from '../Cards/StudentSubmissionCard';
-import { useTranslation } from 'react-i18next';
 
 interface IStudentSubmissionList {
   submissions: StudentSubmission[];

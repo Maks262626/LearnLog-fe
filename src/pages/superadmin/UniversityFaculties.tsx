@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import { defaultColDef, myTableTheme } from '@/constants';
@@ -9,7 +10,6 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetFacultiesByUniversityIdQuery } from '@/redux/facultyApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const UniversityFaculties = () => {
   const { id } = useParams();

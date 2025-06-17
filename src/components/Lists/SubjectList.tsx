@@ -1,8 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 import { Subject } from '@/models/Subject';
 import { Grid, Typography } from '@mui/material';
 
 import SubjectCard from '../Cards/SubjectCard';
-import { useTranslation } from 'react-i18next';
 
 interface SubjectListProps {
   subjects: Subject[];
@@ -31,16 +32,16 @@ const SubjectList = ({ subjects, handleEdit, handleDelete, handleClick }: Subjec
             onClick={
               handleClick
                 ? () => {
-                  handleClick(subject.id);
-                }
+                    handleClick(subject.id);
+                  }
                 : undefined
             }
-            onDelete={handleDelete ? () => { } : undefined}
+            onDelete={handleDelete ? () => {} : undefined}
             onEdit={
               handleEdit
                 ? () => {
-                  handleEdit(subject.id);
-                }
+                    handleEdit(subject.id);
+                  }
                 : undefined
             }
           />
