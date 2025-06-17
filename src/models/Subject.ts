@@ -9,7 +9,7 @@ export enum SubjectType {
 
 export interface Subject {
   id: string;
-  group: Pick<Group, 'id' | 'name'>;
+  group: Pick<Group, 'id' | 'name' | 'faculty_id'>;
   teacher: Pick<User, 'id' | 'first_name' | 'last_name'>;
   name: string;
   description: string;
