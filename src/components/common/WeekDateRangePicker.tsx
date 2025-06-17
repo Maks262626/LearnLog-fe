@@ -5,6 +5,7 @@ import { DatePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { getStartEndWeekDates } from '@/utils/dateService';
+import { useTranslation } from 'react-i18next';
 
 interface IWeekDateRangePicker {
   startWeekDate: Dayjs;
@@ -19,6 +20,9 @@ const WeekDateRangePicker = ({
   setStartWeekDate,
   setEndWeekDate,
 }: IWeekDateRangePicker) => {
+
+  const {t} = useTranslation();
+
   const handleDateChange = (newValue: Dayjs | null) => {
     if (!newValue) return;
     const [startDate, endDate] = getStartEndWeekDates(newValue);
@@ -65,7 +69,7 @@ const WeekDateRangePicker = ({
         }}
       >
         <DatePicker
-          label="Week Start"
+          label={t('subjectInstance.startTime')}
           value={startWeekDate}
           onChange={(newValue) => handleDateChange(newValue)}
           slotProps={{
@@ -81,7 +85,7 @@ const WeekDateRangePicker = ({
         </Typography>
 
         <DatePicker
-          label="Week End"
+          label={t('subjectInstance.endTime')}
           value={endWeekDate}
           disabled
           sx={{ color: 'red' }}
