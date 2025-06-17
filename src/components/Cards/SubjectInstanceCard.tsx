@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { SubjectInstance, SubjectInstanceStatus } from '@/models/SubjectInstance';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -6,14 +8,13 @@ import LabelIcon from '@mui/icons-material/Label';
 import SubjectIcon from '@mui/icons-material/MenuBook';
 import PlaceIcon from '@mui/icons-material/Place';
 import { Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface ISubjectInstanceCard {
   subjectInstance: SubjectInstance | null;
 }
 
 const SubjectInstanceCard = ({ subjectInstance }: ISubjectInstanceCard) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   if (!subjectInstance) {
     return <Typography>{t('subjectInstance.None')}</Typography>;

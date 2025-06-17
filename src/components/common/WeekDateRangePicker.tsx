@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { Box, IconButton, Tooltip, Typography } from '@mui/material';
@@ -5,7 +7,6 @@ import { DatePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 import { getStartEndWeekDates } from '@/utils/dateService';
-import { useTranslation } from 'react-i18next';
 
 interface IWeekDateRangePicker {
   startWeekDate: Dayjs;
@@ -20,8 +21,7 @@ const WeekDateRangePicker = ({
   setStartWeekDate,
   setEndWeekDate,
 }: IWeekDateRangePicker) => {
-
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const handleDateChange = (newValue: Dayjs | null) => {
     if (!newValue) return;

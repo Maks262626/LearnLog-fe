@@ -1,7 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import { Subject } from '@/models/Subject';
 import { Delete, Edit } from '@mui/icons-material';
 import { Box, Button, Card, CardContent, IconButton, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface SubjectCardProps {
   subject: Subject;

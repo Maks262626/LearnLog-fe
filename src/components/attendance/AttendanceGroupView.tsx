@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { AttendanceStatus } from '@/models/Attendance';
 import { Color } from '@/types/Color';
 import { StudentGroupAttendanceSummaryReport } from '@/types/Reports';
@@ -15,7 +17,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 interface AttendanceReportProps {
   data: StudentGroupAttendanceSummaryReport[];
@@ -32,7 +33,7 @@ const getStatusColor = (status: AttendanceStatus): Color => {
   return color;
 };
 const AttendanceReport = ({ data }: AttendanceReportProps) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Box>

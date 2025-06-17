@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { StudentGroupGradesSummaryReport } from '@/types/Reports';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
@@ -15,7 +17,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] }) => {
   const { t } = useTranslation();
@@ -31,7 +32,8 @@ const SubjectsGradesView = ({ data }: { data: StudentGroupGradesSummaryReport[] 
                 {subject.description} — {t('general.type')}: {subject.type.toUpperCase()}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {t('group.name')}: {subject.group.name}, {t('subject.teacher')}: {subject.teacher.first_name} {subject.teacher.last_name}
+                {t('group.name')}: {subject.group.name}, {t('subject.teacher')}: {subject.teacher.first_name}{' '}
+                {subject.teacher.last_name}
               </Typography>
             </Box>
           </AccordionSummary>

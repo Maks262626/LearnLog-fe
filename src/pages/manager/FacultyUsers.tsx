@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { defaultColDef, myTableTheme } from '@/constants';
@@ -10,7 +11,6 @@ import { AgGridReact } from 'ag-grid-react';
 import Loader from '@/components/common/Loader';
 
 import { useGetMeQuery, useGetUsersFromFacultyQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const FacultyUsers = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const FacultyUsers = () => {
   const facultyId = user?.data.faculty_id;
   if (!facultyId) return;
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { data, isLoading } = useGetUsersFromFacultyQuery(facultyId);
 
   const columns: ColDef<User>[] = [

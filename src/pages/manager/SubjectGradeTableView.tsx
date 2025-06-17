@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { StudentGroupGradesSummaryReport } from '@/types/Reports';
 import {
   Box,
@@ -11,10 +13,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryReport[] }) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Box p={2}>
@@ -24,8 +25,8 @@ const SubjectsGradesTableView = ({ data }: { data: StudentGroupGradesSummaryRepo
             {subjectReport.subject.name}
           </Typography>
           <Typography variant="subtitle1" gutterBottom color="textSecondary">
-            {t('subject.teacher')}: {subjectReport.subject.teacher.first_name} {subjectReport.subject.teacher.last_name} | {t('group.name')}:{' '}
-            {subjectReport.subject.group.name}
+            {t('subject.teacher')}: {subjectReport.subject.teacher.first_name} {subjectReport.subject.teacher.last_name}{' '}
+            | {t('group.name')}: {subjectReport.subject.group.name}
           </Typography>
 
           <TableContainer component={Paper} variant="outlined">

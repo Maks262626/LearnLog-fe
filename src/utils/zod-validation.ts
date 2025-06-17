@@ -53,7 +53,7 @@ export const finalGradeValidation = z.object({
   subject_id: z.string().min(1),
   user_id: z.string().min(1),
   final_grade: z.number().positive(),
-  exam_grade: z.number().positive().optional(),
+  exam_grade: z.number().positive().nullable().optional(),
 });
 
 export const studentSubmissionValidation = z.object({

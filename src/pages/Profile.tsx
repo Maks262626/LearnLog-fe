@@ -1,6 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 import { useAuth0 } from '@auth0/auth0-react';
 import { Avatar, Box, Button, Card, CardContent, Stack, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const Profile = () => {
   const { loginWithRedirect, logout, user } = useAuth0();
@@ -37,7 +38,8 @@ const Profile = () => {
               <strong>{t('profile.email')}:</strong> {user.email}
             </Typography>
             <Typography variant="body1" color="textSecondary">
-              <strong>{t('profile.role')}:</strong> {user['https://learnlog.com/roles']?.join(', ') || t('profile.noRole')}
+              <strong>{t('profile.role')}:</strong>{' '}
+              {user['https://learnlog.com/roles']?.join(', ') || t('profile.noRole')}
             </Typography>
           </CardContent>
           <Button variant="contained" color="secondary" onClick={() => handleLogout()}>
@@ -46,16 +48,10 @@ const Profile = () => {
         </Card>
       )}
       <Stack direction="row" spacing={1}>
-        <Button
-          variant={currentLang === 'en' ? 'contained' : 'outlined'}
-          onClick={() => changeLanguage('en')}
-        >
+        <Button variant={currentLang === 'en' ? 'contained' : 'outlined'} onClick={() => changeLanguage('en')}>
           EN
         </Button>
-        <Button
-          variant={currentLang === 'ua' ? 'contained' : 'outlined'}
-          onClick={() => changeLanguage('ua')}
-        >
+        <Button variant={currentLang === 'ua' ? 'contained' : 'outlined'} onClick={() => changeLanguage('ua')}>
           UA
         </Button>
       </Stack>

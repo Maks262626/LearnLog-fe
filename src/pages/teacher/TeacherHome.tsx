@@ -1,7 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 import { routes } from '@/routes';
 
 import TileList from '@/components/Lists/TileList';
-import { useTranslation } from 'react-i18next';
 
 const TeacherHome = () => {
   const { t } = useTranslation();

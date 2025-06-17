@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Subject, SubjectType } from '@/models/Subject';
@@ -25,7 +26,6 @@ import { SubjectValidationType, subjectValidation } from '@/utils/zod-validation
 import { useGetFacultiesInMyUniversityQuery } from '@/redux/facultyApiSlice';
 import { useGetGroupsInMyFacultyQuery } from '@/redux/groupSlice';
 import { useGetTeachersByFacultyIdQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 interface ISubjectForm {
   subject?: Subject;
@@ -33,7 +33,7 @@ interface ISubjectForm {
 }
 
 const SubjectForm = ({ subject, onSubmit }: ISubjectForm) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { data: groups, isLoading: isGroupLoading } = useGetGroupsInMyFacultyQuery();
   const { data: faculties } = useGetFacultiesInMyUniversityQuery();

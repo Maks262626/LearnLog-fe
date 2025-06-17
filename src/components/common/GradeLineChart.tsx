@@ -1,6 +1,7 @@
+import { useTranslation } from 'react-i18next';
+
 import { Box, Typography } from '@mui/material';
 import { LineChart } from '@mui/x-charts/LineChart';
-import { useTranslation } from 'react-i18next';
 
 interface GradeEntry {
   name: string;
@@ -12,7 +13,7 @@ interface Props {
 }
 
 const GradeLineChart = ({ grades }: Props) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   if (grades.length === 0) return null;
 

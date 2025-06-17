@@ -1,11 +1,11 @@
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { FinalGrade } from '@/models/FinalGrade';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Button, TextField } from '@mui/material';
 
 import { FinalGradeValidationType, finalGradeValidation } from '@/utils/zod-validation';
-import { useTranslation } from 'react-i18next';
 
 interface IFinalGradeForm {
   onSubmit: (data: FinalGradeValidationType) => void;
@@ -13,11 +13,12 @@ interface IFinalGradeForm {
 }
 
 const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const defaultValues = {
     subject_id: '',
     user_id: '',
     final_grade: 0,
+    exam_grade: null,
   };
 
   const formMethods = useForm<FinalGradeValidationType>({
@@ -72,7 +73,10 @@ const FinalGradeForm = ({ onSubmit, finalGrade }: IFinalGradeForm) => {
               helperText={errors.exam_grade?.message}
               variant="outlined"
               fullWidth
-              onChange={(e) => field.onChange(+e.target.value)}
+              onChange={(e) => {
+                const value = e.target.value;
+                field.onChange(+value === 0 ? null : +value);
+              }}
             />
           )}
         />

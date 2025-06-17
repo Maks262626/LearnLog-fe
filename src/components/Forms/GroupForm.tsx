@@ -1,4 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { Group } from '@/models/Group';
@@ -9,7 +10,6 @@ import { Box, Button, Paper, TextField } from '@mui/material';
 import { GroupValidationType, groupValidation } from '@/utils/zod-validation';
 
 import { useGetMeQuery } from '@/redux/usersApiSlice';
-import { useTranslation } from 'react-i18next';
 
 interface IGroupForm {
   group?: Group;

@@ -1,15 +1,16 @@
+import { useTranslation } from 'react-i18next';
+
 import { StudentGradesReports } from '@/types/Reports';
 import { Box, Card, CardContent, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 
 import GradeLineChart from '../common/GradeLineChart';
-import { useTranslation } from 'react-i18next';
 
 interface IGradesView {
   data: StudentGradesReports[];
 }
 
 const GradesView = ({ data }: IGradesView) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <Box p={3}>
       <Typography variant="h4" gutterBottom>

@@ -12,10 +12,10 @@ import 'dayjs/locale/uk';
 
 import App from './App.tsx';
 import Auth0Wrapper from './components/wrappers/Auth0Wrapper.tsx';
+import './i18n';
 import './index.css';
 import { setupStore } from './redux/store.ts';
 import darkTheme from './utils/theme.ts';
-import './i18n';
 
 const store = setupStore();
 ModuleRegistry.registerModules([AllCommunityModule]);

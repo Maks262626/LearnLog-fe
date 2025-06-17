@@ -1,13 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import { Alert, Box, CircularProgress } from '@mui/material';
 
 import GradesView from '@/components/journal/GradesView';
 
 import { useGetStudentGradesReportQuery } from '@/redux/reportsApiSlice';
-import { useTranslation } from 'react-i18next';
 
 const StudentGrades = () => {
   const { data, isLoading, error } = useGetStudentGradesReportQuery();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   if (isLoading) {
     return (

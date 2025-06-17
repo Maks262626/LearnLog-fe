@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import GridOnIcon from '@mui/icons-material/GridOn';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
@@ -25,7 +26,6 @@ import { useGetUsersFromGroupQuery } from '@/redux/usersApiSlice';
 
 import SubjectsGradesTableView from './SubjectGradeTableView';
 import SubjectsGradesView from './SubjectGradesView';
-import { useTranslation } from 'react-i18next';
 
 const Reports = () => {
   const { t } = useTranslation();
@@ -88,7 +88,12 @@ const Reports = () => {
         <Box sx={{ display: 'flex', gap: 4 }}>
           <FormControl sx={{ minWidth: 200, mb: 3 }}>
             <InputLabel id="report-select-label">{t('reports.type')}</InputLabel>
-            <Select labelId="report-select-label" value={reportType} label={t('reports.type')} onChange={handleSelectType}>
+            <Select
+              labelId="report-select-label"
+              value={reportType}
+              label={t('reports.type')}
+              onChange={handleSelectType}
+            >
               <MenuItem value="grades">{t('reports.grades')}</MenuItem>
               <MenuItem value="attendances">{t('reports.attendances')}</MenuItem>
               <MenuItem value="individual">{t('reports.stats')}</MenuItem>
